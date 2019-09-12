@@ -1,0 +1,62 @@
+开发工具(c/s工具,代码工具)：
+myeclipse
+eclipse
+jdk
+tomcat
+mysql  
+sqlyog
+Oracle
+toad for Oracle
+postgresql
+pgAdminIII
+mssql
+Notepad++
+editUI
+EditPlus
+office wps
+redis
+secretCRT
+filezilla
+svn
+maven
+nexus
+activeMq
+pdfReader
+xMind
+Axure
+visio
+powerdesigner
+Photoshop css
+zookeeper
+ie
+chrome
+Firefox
+sslvpn easyConnet
+vware 
+
+代码工具：
+jdbc连接池
+svn插件
+redis连接
+activemq代码客户端
+ZooInspector工具
+
+
+在线工具(b/s工具)：
+json在线测试
+ascII在线转换
+外语在线翻译
+css颜色在线配对
+正则表达式在线查询
+http状态码查询工具
+java常用在线工具 http://tool.oschina.net/
+
+内置工具：
+vim(linux内核内置工具)
+ftp(windows内置工具)
+
+
+
+
+
+

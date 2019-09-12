@@ -1,0 +1,192 @@
+start a+b:1+2
+sleep........
+start a+b:2+4
+sleep........end
+total,value:4
+sleep........
+sleep........end
+total,value:10
+
+
+/**
+ * 类锁
+ */
+public void add0(Integer a,Integer b) {
+	synchronized(ClassLock.class) {
+		total = total+a+b;
+		try {
+			System.out.println("sleep........");
+			Thread.sleep(15000);
+			System.out.println("sleep........end");
+			System.out.println("total,value:"+total);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+/**
+ * 类锁
+ */
+public void add0(Integer a,Integer b) {
+	synchronized(this) {
+		total = total+a+b;
+		try {
+			System.out.println("sleep........");
+			Thread.sleep(15000);
+			System.out.println("sleep........end");
+			System.out.println("total,value:"+total);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+/**
+ * 类锁
+ */
+public static synchronized void add0(Integer a,Integer b) {
+	
+		total = total+a+b;
+		try {
+			System.out.println("sleep........");
+			Thread.sleep(15000);
+			System.out.println("sleep........end");
+			System.out.println("total,value:"+total);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+}
+
+@RequestMapping("/login/{a}/{b}")
+public synchronized String test(Model model,@PathVariable Integer a,@PathVariable Integer b) {
+	User user = new User();
+	System.out.println("start a+b:"+a+"+"+b);
+	//add0(a,b);
+	System.out.println("sleep........");
+	try {
+		Thread.sleep(15000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("sleep........end==value:"+a+b);
+	model.addAttribute("user", user);
+	return "login";
+}
+
+public synchronized void add0(Integer a,Integer b) {
+	
+		Integer total1 = a+b;
+		try {
+			System.out.println("sleep........");
+			Thread.sleep(15000);
+			System.out.println("sleep........end");
+			System.out.println("total,value:"+total1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+}
+
+结果：
+start a+b:2+4
+sleep........
+start a+b:1+2
+sleep........end
+total,value:7
+sleep........
+sleep........end
+total,value:10
+
+public  String test(Model model,@PathVariable Integer a,@PathVariable Integer b)throws Exception {
+	User user = new User();
+	System.out.println("start a+b:"+a+"+"+b);
+	ClassLock cl = new ClassLock();
+	cl.add01(a, b);
+	model.addAttribute("user", user);
+	return "login";
+}
+
+public synchronized void add01(Integer a,Integer b) {
+	
+		total = total+a+b;
+		try {
+			System.out.println("sleep........");
+			Thread.sleep(15000);
+			System.out.println("sleep........end"+a+b);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+}
+
+start a+b:1+2
+sleep........
+start a+b:2+4
+sleep........
+
+sleep........end12
+sleep........end24
+
+public  String test(Model model,@PathVariable Integer a,@PathVariable Integer b)throws Exception {
+	User user = new User();
+	System.out.println("start a+b:"+a+"+"+b);
+	ClassLock.add01(a, b);
+	model.addAttribute("user", user);
+	return "login";
+}
+
+
+public static synchronized void add01(Integer a,Integer b) {
+	
+	total = total+a+b;
+	try {
+		System.out.println("sleep........");
+		Thread.sleep(15000);
+		System.out.println("sleep........end"+a+b);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+start a+b:1+2
+sleep........
+start a+b:2+4
+
+sleep........end12
+sleep........
+
+sleep........end24
+
+1 线程：进程中负责程序执行的执行单元
+线程本身依靠程序进行运行
+线程是程序中的顺序控制流，只能使用分配给程序的资源和环境
+
+2 进程：执行中的程序
+一个进程至少包含一个线程
+
+3 单线程：程序中只存在一个线程，实际上主方法就是一个主线程
+
+4 多线程：在一个程序中运行多个任务
+目的是更好地使用CPU资源
+
+调用yield方法会让当前线程交出CPU权限，让CPU去执行其他的线程。它跟sleep方法类似，同样不会释放锁。
+但是yield不能控制具体的交出CPU的时间，另外，yield方法只能让拥有相同优先级的线程有获取CPU执行时间的机会。
+
+注意，调用yield方法并不会让线程进入阻塞状态，而是让线程重回就绪状态，它只需要等待重新获取CPU执行时间，这一点是和sleep方法不一样的。
+
+实现线程的方式
+实现Callable接口
+实现runnable接口
+继承Thread一般类
+
+
+java内存结构/内存模型

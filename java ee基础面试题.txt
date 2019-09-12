@@ -1,0 +1,20 @@
+**hashMap的原理以及其深入的理解
+https://blog.csdn.net/mbshqqb/article/details/79799009
+HashMap LinkedHashMap Hashtable ConcurrentMap ConcurrentHashMap AbstractMap
+
+hashcode equals
+
+线程：
+线程和进程的概念理解
+线程的种类：守护线程和非守护线程
+线程之间的通信
+线程本地类 ThreadLocal
+线程池的理解
+
+
+hashset list初始化尺寸大小
+算法：排序与查找
+程序：算法与结构（存储）
+关键字：volita
+
+

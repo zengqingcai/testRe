@@ -1,0 +1,113 @@
+
+
+
+
+
+SELECT
+	COUNT(1) AS deliveryUserNum
+FROM
+	t_cycling_bu_2c_user_info u
+WHERE
+	u.enable = 1
+	AND	EXISTS (
+				SELECT
+					o.id
+				FROM
+					t_cycling_bu_2c_order o
+				WHERE
+					o.user_id = u.user_id
+					AND o.created_time >='2018-04-10'
+					AND o.created_time < '2018-04-31'
+					AND o.enable = 1
+			)	
+	AND u.city_code IN (420000000000,440300000000)
+GROUP BY u.city_code
+
+
+
+SELECT * FROM t_cycling_bu_2c_user_info WHERE user_id=41
+
+
+
+SELECT COUNT(DISTINCT o.user_id) 
+FROM t_cycling_bu_2c_order o LEFT JOIN t_cycling_bu_2c_user_info u
+ON o.user_id=u.user_id
+WHERE 1=1 
+AND u.city_code IN(SELECT area_code FROM t_cycling_db_area WHERE parent_id='2250')
+AND o.order_time>='2018-04-01' AND o.order_time<'2018-04-31'
+
+SELECT COUNT(DISTINCT o.user_id) 
+FROM t_cycling_bu_2b_order o LEFT JOIN t_cycling_bu_2c_user_info u
+ON o.user_id=u.user_id
+WHERE 1=1 
+AND u.city_code IN(SELECT area_code FROM t_cycling_db_area WHERE parent_id='2250')
+AND o.created_time>='2018-04-01' AND o.created_time<'2018-04-31'
+
+
+
+是否已经绑卡
+
+
+public static Integer total=0;
+
+@RequestMapping(value = "/aliance-update-test", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+@ApiOperation(value = "测试接口")
+public String updateAlianceTest(@RequestBody RequestBean<Map<String,Object>> requestBean) throws Exception {
+	
+	Map<String,Object> params = requestBean.getRequestBody().getData();
+	String target = params.get("name").toString();
+	Integer count = Integer.valueOf(params.get("count").toString());
+	System.out.println(target + ",out start==time:"+sdf.format(new Date()));
+	doSyn(count,target);
+	System.out.println(target + ",out end==time:"+sdf.format(new Date()));
+	System.out.println("afer total:"+total);
+	return target+"end.........";
+}
+
+public synchronized static void doSyn(Integer count,String target) {
+	System.out.println(target + ",instart==time:"+sdf.format(new Date()));
+	System.out.println("before total:"+total);
+	total = total + count;
+	try {
+		Thread.sleep(15000);
+		System.out.println(target + ",inend==time:"+sdf.format(new Date()));
+		
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+@RequestMapping(value = "/aliance-update-test", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+@ApiOperation(value = "测试接口")
+public String updateAlianceTest(@RequestBody RequestBean<Map<String,Object>> requestBean) throws Exception {
+	
+	Map<String,Object> params = requestBean.getRequestBody().getData();
+	String target = params.get("name").toString();
+	System.out.println(target + ",out start==time:"+sdf.format(new Date()));
+	
+	testRedisLock(target);
+	
+	System.out.println(target + ",out end==time:"+sdf.format(new Date()));
+	
+	return target+"end.........";
+}
+
+public void testRedisLock(String target) {
+	System.out.println(target + ",int start==time:"+sdf.format(new Date()));
+	if(!"locking".equals(jedisCluster.get("key"))) {
+		jedisCluster.setex("key", 10, "locking");
+		System.out.println(target+"setex key locking");
+	}else {
+		
+		System.out.println("is  locking");
+	}
+	
+	System.out.println(target + ",int end==time:"+sdf.format(new Date()));
+}
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+showdown -h now
+systemctl stop firewalld.service ¹Ø±Õ·À»ðÇ½
+nohup command > myout.file 2>&1 &
+
+http://DESKTOP-V15JKM4/svn/Test/Zeng/
+
+

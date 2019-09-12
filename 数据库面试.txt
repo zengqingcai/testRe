@@ -1,0 +1,45 @@
+数据库面试题：
+视图 与安全 https://www.cnblogs.com/sustudy/p/4166714.html
+索引添加 命中索引 索引库solr
+sql优化
+三范式，（比如 通俗的说）
+引擎 innodb myisan
+事务 acid
+锁机制 乐观锁 悲观锁 
+mysql的数据结构:B+树  为什么使用B-Tree（B+Tree） 数据存储在叶子节点中 叶子节点有指针指向相邻的叶子节点形成一个链状的数据链。
+***缓存
+mysql缓存机制：缓存存在一个hash表中，通过查询SQL，查询数据库
+就是缓存sql文本（key）及缓存结果（value），用KV形式保存再服务器内存中，如果运行相同的sql,服务器直接从缓存中去获取结果，
+不需要在再去解析、优化、执行sql，（连接器）
+缓存的工作流程
+1.服务器接收SQL，以SQL和一些其他条件为key查找缓存表 
+2.如果找到了缓存，则直接返回缓存 
+3.如果没有找到缓存，则执行SQL查询，包括原来的SQL解析，优化等。 
+4.执行完SQL查询结果以后，将SQL查询结果缓存入缓存表
+对MySql查询缓存的理解及总结   
+一、MySql的Query Cache   
+1、Query Cache   
+MySQL Query Cache是用来缓存我们所执行的SELECT语句以及该语句的结果集。MySql在实现Query Cache的具体技术细节上类似典型的KV存储，就是将SELECT语句和该查询语句的结果集做了一个HASH映射并保存在一定的内存区域中。当客户端发起SQL查询时，Query Cache的查找逻辑是，先对SQL进行相应的权限验证，接着就通过Query Cache来查找结果。它不需要经过Optimizer模块进行执行计划的分析优化，更不需要发生同任何存储引擎的交互，减少了大量的磁盘IO和CPU运算，所以有时候效率非常高。   2、Query Cache设置参数   
+可以通过调整 MySQL的参数打开并设置它的Query Cache功能，主要有以下5个参数：   （1）、query_cache_limit：允许缓存的单条查询结果集的最大容量，默认是1MB，超过此参数设置的查询结果集将不会被缓存； （2）、query_cache_min_res_unit：设置查询缓存Query Cache每次分配内存的最小空间大小，即每个查询的缓存最小占用的内存空间大小； 
+（3）、query_cache_size：设置 Query Cache 所使用的内存大小，默认值为0，大小必须是1024的整数倍，如果不是整数倍，MySQL 会自动调整降低最小量以达到1024的倍数； （4）、query_cache_type：控制 Query Cache 功能的开关，可以设置为0、1、2三种，意义分别如下：   
+		a、0(OFF)：关闭 Query Cache 功能，任何情况下都不会使用 Query Cache；   
+		b、1(ON)：开启 Query Cache 功能，但是当SELECT语句中使用SQL_NO_CACHE提示后，将不使用Query Cache；   
+		c、2(DEMAND)：开启Query Cache 功能，但是只有当SELECT语句中使用了SQL_CACHE 提示后，才使用Query Cache。 （5）、query_cache_wlock_invalidate：控制当有写锁定发生在表上的时刻是否先失效该表相关的Query Cache，如果设置为1(TRUE)，则在写锁定的同时将失效该表相关的所有Query Cache，如果设置为0(FALSE)则在锁定时刻仍然允许读取该表相关的Query Cache。   
+3、Query Cache和性能   
+任何事情过犹不及，尤其对于某些写频繁的系统，开启Query Cache功能可能并不能让系统性能有提升，有时反而会有下降。原因是MySql为了保证Query Cache缓存的内容和实际数据绝对一致，当某个数据表发生了更新、删除及插入操作，MySql都会强制使所有引用到该表的查询SQL的Query Cache失效。对于密集写操作，启用查询缓存后很可能造成频繁的缓存失效，间接引发内存激增及CPU飙升，对已经非常忙碌的数据库系统这是一种极大的负担。   
+4、其他   
+Query Cache因MySql的存储引擎不同而实现略有差异，比如MyISAM，缓存的结果集存储在OS Cache中，而最流行的InnoDB则放在Buffer Pool中。  
+
+临时表
+存储过程
+触发器
+内置函数(日期转换，数据转换 null值的判断)
+       
+
+     
+
+
+
+
+
+
