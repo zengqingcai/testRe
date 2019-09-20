@@ -1,12 +1,3 @@
-本地安装jar
-mvn install:install-file -Dfile=D:/ZQC/postmsg-ump-4.0.1.jar -DgroupId=cn.xuanwu -DartifactId=postmsg-ump -Dversion=4.0.1 -Dpackaging=jar
-
-<dependency>
-	<groupId>cn.xuanwu</groupId>
-	<artifactId>postmsg-ump</artifactId>
-	<version>4.0.1</version>
-</dependency>
-
 黑盒子
 只知道入参和出参至于里面的流程，接口之间的调用就不知道
 
@@ -195,16 +186,6 @@ kingtuns.txt.r101
 kingtuns.txt.r102
 kingtuns.txt.mine
 kingtuns.txt。
-
-苹果
-粥
-
-
-
-
-
-https://open.weixin.qq.com/connect/oauth2/authorize?
-appid=&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE&component_appid=component_appid#wechat_redirect
 
 
 
@@ -1327,6 +1308,9 @@ liuhui xhg2018#
 less cms-service_error.2018-12-19.7.log|grep 'error'
 less sys-config.log |grep -100 1c4d1792f401a8330000
 
+
+
+
 	
 300*500
 后天系统
@@ -1578,9 +1562,6 @@ private CardInviteBizService getSelfProxy() {
 
 static{}与{}区别
 
-jumpserver账号密码：
-zengqingcai
-Zengqc@11ds123
 
 遇到的问题：没有添加事务 定位问题的困难
 
@@ -1588,23 +1569,35 @@ http://10.10.10.222:8070/signin#/appid=xhg-boss
 账号：13657034947
 密码：113062520
 
-
-业务意义
-
-喝茶、水果、每日坚果、
-
 适配器
 对接
 
 
 
-git账号：13544361981@163.com
-密码：zengqc7问好
-
-邮箱：13544361981@163.com
-密码：zengqc7问好
-
 支付宝的钱转过来
+
+https://www.cnblogs.com/sxdcgaq8080/p/7712874.html
+
+
+zengqc7问好+!
+
+
+枚举：
+
+修改
+增加的方法
+
+
+账号：身份证
+密码：多个叹号
+
+
+循环加事务
+用controller接收异常，service抛出异常，然后方法头部加上@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })确实是起作用的。
+
+
+jsr303
+自定义校验器
 
 
 
