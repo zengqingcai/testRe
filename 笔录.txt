@@ -1,33 +1,3 @@
-黑盒子
-只知道入参和出参至于里面的流程，接口之间的调用就不知道
-
-业务时序图
-
-业务功能解决方案
-
-随着互联网技术的发展，现在的网站架构基本都由原来的后端渲染，变成了：前端渲染、先后端分离的形态，而且前端技术和后端技术在各自的道路上越走越远。 
-前端和后端的唯一联系，变成了API接口；API文档变成了前后端开发人员联系的纽带，变得越来越重要。swagger框架
-
-程序的入口
-业务需求
-技术实现
-
-
-
-
-二维码
-AI
-区块链
-芯片
-跨界打劫
-时代的车轮
-
-public static <T> List<T> set2List2(T set) {
-
-	List<T> list = new ArrayList<>();
-	list.add(set);
-	return list;
-}
 
 public static <T> List<T> set2List2(List<T> list,T t) {
 
@@ -39,7 +9,7 @@ public static <T> T set2List(T set) {
 
 	List<T> list = new ArrayList<>();
 	list.add(set);
-	return null;
+	return set;
 }
 
 Java内存管理
@@ -49,34 +19,10 @@ Java内存管理
 	    而是只通过其他应用层service调用返回结果
 	
 23种java设计模式:
-设计模式遵循的原则有6个：
 
-1、开闭原则（Open Close Principle）
-
-　　对扩展开放，对修改关闭。（版本升级添加分页方法）
-
-2、里氏代换原则（Liskov Substitution Principle）
-
-　　只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。
-
-3、依赖倒转原则（Dependence Inversion Principle）
-
-　　这个是开闭原则的基础，对接口编程，依赖于抽象而不依赖于具体。
-
-4、接口隔离原则（Interface Segregation Principle）
-
-　　使用多个隔离的借口来降低耦合度。
-
-5、迪米特法则（最少知道原则）（Demeter Principle）
-
-　　一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。
-
-6、合成复用原则（Composite Reuse Principle）
-
-　　原则是尽量使用合成/聚合的方式，而不是使用继承。继承实际上破坏了类的封装性，超类的方法可能会被子类修改。
 
 java的4个特性：抽象 多态 继承 封装
-低耗高效 可复用 可便于维护 可伸缩(插拔) 易读好理解  
+代码的优化：低耗高效 可复用 可便于维护 可伸缩(插拔) 易读好理解  
 
 多线程就是这种思想。一个执行程序有多个线程，目的就是为了提高效率，并使你在进行一个功能时能同时进行另外一个功能， 
 
@@ -219,30 +165,6 @@ List<Object>去重:
 set distinct
 groupby:
 Map<Boolean, List<Integer>> collectGroup = Stream.of(1, 2, 3, 4).collect(Collectors.groupingBy(it -> it > 3));  
-
-
-HashMap、TreeMap和HashTable的区别
-
-Map接口有三个比较重要的实现类，分别是HashMap、TreeMap和HashTable。
-
-TreeMap是有序的，HashMap和HashTable是无序的。
-
-Hashtable的方法是同步的，HashMap的方法不是同步的。这是两者最主要的区别。
-
-这就意味着Hashtable是线程安全的，HashMap不是线程安全的。HashMap效率较高，Hashtable效率较低。 如果对同步性或与遗留代码的兼容性没有任何要求，建议使用HashMap。 查看Hashtable的源代码就可以发现，
-除构造函数外，Hashtable的所有 public 方法声明中都有 synchronized关键字，而HashMap的源码中则没有。
-
-Hashtable不允许null值，HashMap允许null值（key和value都允许）
-
-父类不同：Hashtable的父类是Dictionary，HashMap的父类是AbstractMap
-
-Hashtable中hash数组默认大小是11，增加的方式是 old*2+1。
-
-HashMap中hash数组的默认大小是16，而且一定是2的指数。
-
-
-hibernate 实体被final修饰
-
 
 
 
@@ -1598,6 +1520,13 @@ zengqc7问好+!
 
 jsr303
 自定义校验器
+
+
+mvn mybatis-generator:generate
+
+public RespObj test(ReqObj request){
+
+}
 
 
 

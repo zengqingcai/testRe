@@ -90,15 +90,7 @@ for循环事务问题
 
 @EnableScheduling
 
-
-
-
-
-
-
-
-
-
+4、http post请求 前面要加上@RequestBody
 
 
 

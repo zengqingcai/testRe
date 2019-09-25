@@ -1,20 +1,155 @@
 **hashMap的原理以及其深入的理解
 https://blog.csdn.net/mbshqqb/article/details/79799009
-HashMap LinkedHashMap Hashtable ConcurrentMap ConcurrentHashMap AbstractMap
+https://baijiahao.baidu.com/s?id=1618550070727689060&wfr=spider&for=pc
+Map接口
+	AbstractMap
+		-> HashMap
+			-> LinkedHashMap
+		-> TreeMap
+		-> ConcurrentHashMap
+	Dictionary
+		-> Hashtable
 
-hashcode equals
+HashMap：适用于在Map中插入、删除和定位元素，线程不安全。
+Treemap：适用于按自然顺序或自定义顺序遍历键(key)，线程不安全，通常比HashMap慢。
+Hashtable：线程安全，性能较差，不建议使用。
+LinkedHashMap：能按插入/访问顺序遍历的HashMap，线程不安全。
+ConcurrentHashMap：线程安全，锁力度细，性能较好。（相当于我们的mysql的行锁）
+Collections.synchronizedMap： 线程安全，可以接收任意Map实例。
 
-线程：
-线程和进程的概念理解
-线程的种类：守护线程和非守护线程
-线程之间的通信
-线程本地类 ThreadLocal
-线程池的理解
+数据结构：
+List
+Set
+Map
+
+List元素去重：
+		Set<String> set = new HashSet<>();
+        set.addAll(list3);
+但是List的排序变乱，可以用这个 Set<Integer> set = new LinkedHashSet<Integer>();
+
+HashSet集合，采用哈希表结构存储数据，保证元素唯一性的方式依赖于：hashCode()与equals()方法。
+
+hashCode():
+任何类均为Object类的间接子类，所以均继承方法public int hashCode()
+该方法返回的值一般是通过将该对象的内部地址转换成一个整数来实现的。
+这样能保证每个对象的哈希码值不一样。 
+		
+		
+List数据存储的常用结构有：堆栈、队列、数组、链表
 
 
-hashset list初始化尺寸大小
-算法：排序与查找
-程序：算法与结构（存储）
-关键字：volita
+什么是哈希表呢？
+哈希表底层使用的也是数组机制，数组中也存放对象，而这些对象往数组中存放时的位置比较特殊，有一定的依据 ，
+当需要把这些对象给数组中存放时，那么会根据这些对象的特有数据结合相应的算法(hashCode())，计算出这个对象在数组中的位置，
+然后把这个对象存放在数组中。而这样的数组就称为哈希数组，即就是哈希表。
+当向哈希表中存放元素时，需要根据元素的特有数据结合相应的算法，这个算法其实就是Object类中的hashCode方法。
+由于任何对象都是Object类的子类，所以任何对象有拥有这个方法。即就是在给哈希表中存放对象时，会调用对象的hashCode方法，
+算出对象在表中的存放位置，这里需要注意，如果两个对象hashCode方法算出结果一样，这样现象称为哈希冲突，这时会调用对象的equals方法，
+比较这两个对象是不是同一个对象，如果equals方法返回的是true，那么就不会把第二个对象存放在哈希表中，
+如果返回的是false，就会把这个值存放在哈希表中。
+
+java 位运算概念
+
+
+总结：
+保证HashSet集合元素的唯一，其实就是根据对象的hashCode和equals方法来决定的。
+如果我们往集合中存放自定义的对象，那么保证其唯一，
+就必须复写hashCode和equals方法建立属于当前对象的比较方式。
+
+
+
+由于 StringBuilder 相较于 StringBuffer 有速度快优势，所以多数情况下建议使用 StringBuilder 类。
+然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。
+
+
+重载是针对同类的
+重写针对子父类，接口和实现类，抽象类和实现类
+java 多态的表现形式：
+方法的重载和覆盖
+多态是同一个行为具有多个不同表现形式或形态的能力。
+多态就是同一个接口，使用不同的实例而执行不同操作
+
+Java 序列化也叫持久化，把内存中的对象持久化到硬盘中
+关于序列化，常又称为持久化，将其写入磁盘中。
+进而对于编码规则来说：
+任一一个实体类必须要去实现 Serializable 接口，方便以后将该类持久化，或者将其用于转为字节数组，用于网络传输。
+对于一个实体类，不想将所有的属性都进行序列化，有专门的关键字 transient：
+
+
+**java IO 减少跟数据库的交互：批量插入（例子：投递订单，黑名单，营销短信，回收订单）
+**对象序列化，就是将java对象转化成字节流方便读取，以及网络上的传输。
+
+为什么对象要序列化
+引用对象 String byte[] 直接的转换  对象序列化、反序列化  json格式的序列化
+
+对象的流化
+
+字符串流化：  
+String 转化 byte数组
+String str="adfb";
+byte[] bytes = str.getBytes(); 
+
+byte数组 转化 String
+String t = new String(b,"utf-8");//bytep[]转换为String，支持传递编码
+
+对象流化：
+public byte[] toByteArray (Object obj) {
+	byte[] bytes = null;
+	ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	try {
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
+		oos.writeObject(obj);
+		oos.flush();
+		bytes = bos.toByteArray ();
+		oos.close();
+		bos.close();
+	} catch (IOException ex) {
+		ex.printStackTrace();
+	}
+	return bytes;
+}
+流转对象
+public Object toObject (byte[] bytes) {
+	Object obj = null;
+	try {
+		ByteArrayInputStream bis = new ByteArrayInputStream (bytes);
+		ObjectInputStream ois = new ObjectInputStream (bis);
+		obj = ois.readObject();
+		ois.close();
+		bis.close();
+	} catch (IOException ex) {
+		ex.printStackTrace();
+	} catch (ClassNotFoundException ex) {
+		ex.printStackTrace();
+	}
+	return obj;
+}
+
+对象转化json字符串:
+//将Java对象序列化为Json字符串  
+String objectToJson = JSON.toJSONString(initUser());  
+System.out.println(objectToJson);  
+// 将Json字符串反序列化为Java对象  
+User user = JSON.parseObject(objectToJson, User.class);  
+System.out.println(user);  
+
+
+23种模式：http://c.biancheng.net/view/1343.html
+为了使程序的扩展性好，易于维护和升级
+创建型模式：（创建与使用）
+单列模式，对频繁用到的类和有些比较大型的类，减少系统开销，降低了系统内存的使用频率，减轻GC压力
+创建型模式分为以下几种。 
+单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。
+原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。
+工厂方法（FactoryMethod）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。（车：丰田霸道，丰田凯美瑞，丰田皇冠  酒：百威 哈尔滨 生力纯生）
+https://www.cnblogs.com/hardy-test/p/10587650.html
+抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。
+建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。
+
+
+
+
+
+
 
 
