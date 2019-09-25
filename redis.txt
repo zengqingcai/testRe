@@ -1,0 +1,75 @@
+需要修改redis.conf
+1.修改bind 
+   原来：  bind  127.0.0.1   代表本地回环地址，访问redis服务只能通过本机的客户端连接，而无法通过远程连接
+  修改为：将此行注释或者讲ip改成0.0.0.0   这样就能接受所有来自于可用网络接口的连接
+2.修改protected mode  保护模式，只允许本地链接
+  修改为：protected mode no
+补充 redis.conf 中的daemonize 配置
+ daemonize yes 代表开启守护进程模式。此时是单进程多线程的模式，redis将在后台运行，并将pid写入redis.conf--pidfile文件中，此时redis将一直运行，除非手动kill
+ daemonize no 当前界面将进入redis的命令行界面，exit强制退出或者关闭连接工具(xshell等)都会导致redis进程退出
+ 先kill -9 pid
+./redis-server redis.conf
+
+添加运行模式
+chmod +x startall.sh
+ps aux|grep redis
+ps ef|grep redis
+
+redis集群设置
+./redis-trib.rb create --replicas 1 192.168.187.129:7001 192.168.187.129:7002 192.168.187.129:7003 192.168.187.129:7004 192.168.187.129:7005  192.168.187.129:7006
+
+cd redis01
+./redis-server redis.conf
+cd ../redis02
+./redis-server redis.conf
+cd ../redis03
+./redis-server redis.conf
+cd ../redis04
+./redis-server redis.conf
+cd ../redis05
+./redis-server redis.conf
+cd ../redis06
+./redis-server redis.conf
+
+超时机制
+重试机制
+幂等
+
+update t_trade_money set status = 1 where status=0 and trade_id=111 and msg_id=222
+
+
+select status from t_trade_money_status where msg_id=333
+
+insert into t_trade_money_status(status,msg_id) values(1,333)
+
+select status from t_trade_money_status where msg_id=333
+
+update t_trade_money_status set status =1 where msg_id=333
+
+https://blog.csdn.net/zhejingyuan/article/details/79480128
+https://www.jianshu.com/p/8c997d0917c6
+RocketMQ第一阶段发送Prepared消息时，会拿到消息的地址，
+第二阶段执行本地事务，
+第三阶段通过第一阶段拿到的地址去访问消息，并修改消息的状态。（消息的确认）
+
+如果确认消息发送失败了怎么办？RocketMQ会定期扫描消息集群中的事务消息，如果发现了Prepared消息，它会向消息发送者确认相关情况。（补偿机制）
+Bob的钱到底是减了还是没减呢？如果减了是回滚还是继续发送确认消息呢？RocketMQ会根据发送端设置的策略来决定是回滚还是继续发送确认消息。
+这样就保证了消息发送与本地事务同时成功或同时失败
+
+topic：
+Topic 是一种消息的逻辑分类，比如说你有订单类的消息，也有库存类的消息，那么就需要进行分类，
+一个是订单 Topic 存放订单相关的消息，一个是库存 Topic 存储库存相关的消息。
+tag：
+小分类
+RocketMQ 由哪些角色组成？
+生产者（Producer）：负责产生消息，生产者向消息服务器发送由业务应用程序系统生成的消息。
+消费者（Consumer）：负责消费消息，消费者从消息服务器拉取信息并将其输入用户应用程序。
+消息服务器（Broker）：是消息存储中心，主要作用是接收来自 Producer 的消息并存储， Consumer 从这里取得消息。
+名称服务器（NameServer）：用来保存 Broker 相关 Topic 等元信息并给 Producer ，提供 Consumer 查找 Broker 信息。（提供路由信息）
+
+
+SendResult sendResult = producer.send(msg,new MessageQueueSelector(){},orderId);
+
+http://www.360doc.com/content/18/0306/17/16915_734787028.shtml
+
+
