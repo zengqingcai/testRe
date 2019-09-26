@@ -93,8 +93,11 @@ for循环事务问题
 @EnableScheduling
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 4、http post请求 前面要加上@RequestBody
 =======
+=======
+>>>>>>> Stashed changes
 RocketMQ 生产者与消费者的封装与调用
 
 

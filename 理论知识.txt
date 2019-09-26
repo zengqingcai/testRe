@@ -632,6 +632,7 @@ nginx
 防刷单（接口限流，验证码添加）
 
 
+<<<<<<< Updated upstream
 
 降级
 过滤器
@@ -692,6 +693,140 @@ http {
 java 对象的克隆
 Student stu2 = (Student)stu1.clone(); 
 
+
+Spring Cloud 两种服务调用方式(Rest + Ribbon) 和 Fegin方式
+rpc
+rest
+restful
+mqtt
+
+mq需要解决的问题：
+重复消费：
+msgId status
+  1    1
+顺序消费
+
+
+
+RPC：远程服务调用（Remote Procedure Call），加上Protocol后可以称为远程过程调用协议，可以用不同的语言实现，可以借用HTTP协议或者其他协议来实现，一般都是通过基于TCP/IP的自定义协议实现。
+HTTP协议和TCP/IP协议有什么关系呢？HTTP是应用层协议，TCP/IP是传输层协议。
+HTTP协议请求中会包含很多内容，传输效率要低，一般RPC实现都不采用HTTP协议；RPC采用自定义的TCP协议，可以精简报文格式，一般都是采用二进制形式，客户端和服务端采用统一的序列化和反序列化方式保持数据统一，效率更高，所以一般企业内部通信都是采用自定义TCP的RPC协议，传输效率高。
+HTTP：超文本传输协议（HyperText Transfer Protocal），是应用层的一种网络传输协议，一般格式都是json或者xml，也是基于TCP/IP实现的。
+REST：是一种架构风格，是基于HTTP协议的，可以理解称一种API的规范，比如查询都是GET请求，新增都是POST，修改是PUT，删除是DELETE等。
+RMI：远程方法调用（Remote Method Invocation），是一种用于实现RPC的java API，仅仅应用在java程序上，依赖于JVM，因为他仅仅支持从一个JVM到另一个JVM的调用。
+
+企业内部的微服务数据传输都是采用自定义的rpc实现的，传输效率更高；http一般是面向用户的，规范统一，用户使用起来方便，直接通过浏览器地址访问接口即可。
+
+
+rocketmq的问题
+=======
+>>>>>>> Stashed changes
+
+降级
+过滤器
+监听器
+拦截器的区别以及执行顺序
+
+自定义注解解析：拦截器，过滤器，Aspect
+https://www.cnblogs.com/yuki67/p/9512046.html
+Spring 中使用@Aspect 控制自定义注解
+@ControllerAdvice 异常拦截并且统一做处理
+
+spring 是如何管理bean的
+spring 是如何管理bean的生命周期
+
+实例化对象
+设置对象属性
+检查Aware相关接口并且设置相关依赖
+BeanPostProcessor前置处理
+检查是否实现了InitializingBean以决定是否调用
+afterPropertiesSet方法
+检查是否配置有自定义的init-method
+BeanPostProcessor后置处理
+注册必要的Destruction相关回调接口
+使用中
+是否实现了DisposableBean接口
+是否配置有自定义的destroy方法
+https://blog.csdn.net/w_linux/article/details/80086950
+
+
+业务需求 
+各种规则 
+各种策略 
+自己定义的方案
+
+
+我上网====》  代理器 ====》 百度web服务器
+
+负载均衡策略：随机 轮询 加权 
+
+
+http {
+       ……
+    upstream upstream_name {
+       server 192.168.103.100:2001 weight=1;  #轮询服务器和访问权重
+       server 192.168.103.100:2002 weight=2;
+	   server 192.168.103.100:2001 weight=1 max_fails=2 fail_timeout=60s;
+	   server 192.168.103.100:2002 weight=2 max_fails=2 fail_timeout=60s;
+    }
+ 
+    server {
+        listen  80;
+        location / {
+            proxy_pass https://upstream_name
+        }
+    }
+}
+
+java 对象的克隆
+Student stu2 = (Student)stu1.clone(); 
+
+<dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-common</artifactId>
+        <version>4.1.0-incubating</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-client</artifactId>
+        <version>4.1.0-incubating</version>
+    </dependency>
+
+
+
+
+
+
+
+
+post请求可以带上HttpServletRequest
+public AjaxResult reviewEmp(HttpServletRequest request,@RequestBody String params)
+
+
+线程不安全；
+    数据不一致或者数据污染或者脏数据
+
+public void delEmployees(Integer employeeid) {
+	Employees employees = employeesMapper.getEmployees(employeeid);
+	Syslog syslog = new Syslog();
+	syslog.setEmployeeid(1);
+	syslog.setStlg("0021");
+	syslog.setBrief("用户：" + employees.getEmployeeid());
+	syslog.setNote("删除用户：" + employees.getEmpid());
+	syslog.setLogdatetime(DateUtils.getTodayStr());
+	employeesMapper.delEmployees(employeeid);
+	syslogMapper.insertSelective(syslog);
+	
+	
+	String str = "线程";
+	str += employeeid;
+	//也经过了一段时间后入库操作  
+	syslogMapper.insert(str);
+	
+}
+p2p授信
+人脸收集 身份证识别 
 
 Spring Cloud 两种服务调用方式(Rest + Ribbon) 和 Fegin方式
 rpc
