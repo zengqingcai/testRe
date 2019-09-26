@@ -1520,6 +1520,11 @@ zengqc7问好+!
 
 jsr303
 自定义校验器
+AtomicInteger
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+mongodb
+https://blog.csdn.net/qq_35888875/article/details/78731555
 
 
 mvn mybatis-generator:generate

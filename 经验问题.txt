@@ -60,6 +60,8 @@ https://www.cnblogs.com/pejsidney/p/9001875.html
 
 rocketmq 视频教程以及使用
 
+cookie redis 
+
 
 svn的使用
 git的使用
@@ -90,7 +92,25 @@ for循环事务问题
 
 @EnableScheduling
 
+<<<<<<< Updated upstream
 4、http post请求 前面要加上@RequestBody
+=======
+RocketMQ 生产者与消费者的封装与调用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 
 

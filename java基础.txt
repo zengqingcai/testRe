@@ -407,7 +407,21 @@ maven集成命令
 maven -U clean compile install -e -X -Dmaven.test.skip=true
 私库的搭建以及配置
 持久化工具搭建 jekins
+redis 加一 减一
 
+
+线程与进程
+
+高并发常用的解决方案：缓存，空间获取时间
+我们之前小黄狗怎么设置线程数的
+Spring线程池ThreadPoolTaskExecutor配置及详情  设置线程池
+
+public static void main( String[] args )
+{
+    ApplicationContext actx = new ClassPathXmlApplicationContext("classpath:Spring-config.xml");
+    UserService userService = actx.getBean(UserServiceImpl.class);
+    userService.getUser();
+}
 
 
 
