@@ -303,21 +303,6 @@ https://www.processon.com/diagrams
 20*8 
 
 
-企业邮箱
-账号：qingcai.zeng@ectrip.com
-密码：zengqc1.。6
-
-oa
-账号：http://oa.ectrip.com:9061/general/login/index.php 曾庆财
-密码：
-
-git
-账号：qingcai.zeng@ectrip.com
-密码：zengqc7问好
-
-数据库
-账号：tomcatdb/tomcatdb
-密码：220.231.216.128:1521/orcl
 
 
 mybatis自动化工具生成命令：

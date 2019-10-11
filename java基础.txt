@@ -425,6 +425,57 @@ public static void main( String[] args )
 
 
 
+spring在项目启动时就执行特定方法
+@Compant
+public class InitDemo{
+
+    @PostConstruct
+    public void init(){
+        //项目启动就会执行这个方法
+        doSomething();
+    }
+}
+
+
+@Component
+public class InitDemo implements InitializingBean {
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
+       //doSomeThing
+    }
+
+@Component
+public class Start implements CommandLineRunner {
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("CommandLineRunner:开始运行...");
+    }
+}
+
+@Component
+public class Start1 implements ApplicationRunner {
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println("ApplicationRunner:开始运行...");
+    }
+}
+
+拦截器 过滤器 定时器 
+springMVC框架Filter注入service
+@Import注解支持导入普通的java类,并将其声明成一个bean。
+https://www.jianshu.com/p/2bd9891916bf
+https://cloud.tencent.com/developer/article/1455362
+
+springboot整合jwt
+springboot整合shiro
+https://blog.csdn.net/jiankang66/article/details/90473517
+springboot整合oauth
+
+用户无感知的操作
+
+
 
 
 

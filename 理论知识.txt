@@ -901,7 +901,15 @@ public void delEmployees(Integer employeeid) {
 	
 }
 p2p授信
-人脸收集 身份证识别 
+人脸收集 身份证识别
+
+
+
+启动rocketmq：
+start mqnamesrv.cmd
+start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
+创建主题
+mqadmin.cmd updateTopic -n localhost:9876  -b localhost:10911  -t tx-mq-TOPIC 
 
 
 
