@@ -1249,7 +1249,12 @@ jumpserver
 
 
 
-nohup java -jar  -Xms200m -Xmx200m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/logs/xhg-cms-service/ -Dspring.config.location=/etc/xhg/xhg-cms-service/application.properties xhg-cms-service-1.0.9.jar 2>../logs/xhg-cms-service/cmsserviceerr.out  1>../logs/xhg-cms-service/cmsservicestd.out  &
+nohup java -jar  -Xms200m -Xmx200m -XX:+HeapDumpOnOutOfMemoryError 
+-XX:HeapDumpPath=/data/logs/xhg-cms-service/ 
+-Dspring.config.location=/etc/xhg/xhg-cms-service/application.properties 
+xhg-cms-service-1.0.9.jar 
+2>../logs/xhg-cms-service/cmsserviceerr.out  
+1>../logs/xhg-cms-service/cmsservicestd.out  &
 
 事务里面尽量不要调用第三方的接口
 
@@ -1313,8 +1318,6 @@ nohup java -jar  -Xms200m -Xmx200m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpP
 
 文章
 电子文章
-
-就冲着 你的爱理不理 就可以看出你
 
 技术技能
 身体素质

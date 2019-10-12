@@ -410,6 +410,22 @@ https://gw.open.icbc.com.cn/api/qrcode/V2/pay
 
 QrcodeGenerateRequestV2.QrcodeGenerateRequestV2Biz bizContent = new QrcodeGenerateRequestV2.QrcodeGenerateRequestV2Biz();
 
+springboot注解的线程池配置：https://blog.csdn.net/whiteGu/article/details/84994098
+springboot使用线程池ThreadPoolTaskExecutor的设置
+多个概念：
+springboot多线程执行定时任务
+
+
+线程有返回值
+线程之间的通信：
+springboot的jvm调优
+springboot的线程池设置
+java调用.bat批文件处理
+
+
+
+    
+
 
 
 

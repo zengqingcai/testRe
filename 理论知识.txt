@@ -857,16 +857,16 @@ rocketmq的问题
 
 
 <dependency>
-        <groupId>org.apache.rocketmq</groupId>
-        <artifactId>rocketmq-common</artifactId>
-        <version>4.1.0-incubating</version>
-    </dependency>
+	<groupId>org.apache.rocketmq</groupId>
+	<artifactId>rocketmq-common</artifactId>
+	<version>4.1.0-incubating</version>
+</dependency>
 
-    <dependency>
-        <groupId>org.apache.rocketmq</groupId>
-        <artifactId>rocketmq-client</artifactId>
-        <version>4.1.0-incubating</version>
-    </dependency>
+<dependency>
+	<groupId>org.apache.rocketmq</groupId>
+	<artifactId>rocketmq-client</artifactId>
+	<version>4.1.0-incubating</version>
+</dependency>
 
 
 
@@ -910,6 +910,16 @@ start mqnamesrv.cmd
 start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
 创建主题
 mqadmin.cmd updateTopic -n localhost:9876  -b localhost:10911  -t tx-mq-TOPIC 
+
+
+知识的累积：
+心理学
+面试题
+可运行的项目，项目总结
+知识的沉淀
+
+
+
 
 
 
