@@ -1,0 +1,4 @@
+linux系统工作记录
+centos02:
+centos03:
+centos04:

@@ -1558,6 +1558,74 @@ aop
 可以添加参数
 jsr303
 
+13544361981
+24655472092
+zengqc793510
+Zengqc793510!@
+139570
+353534
+z353534
+
+
+if(实例 instanceof 类){
+	类 instants = (类)实例;
+}
+
+SpringUtil.getBean("baiduFace");
+
+
+工厂方法模式：
+接口：
+public interface FaceInterface { 
+
+String test(){}
+
+}
+两个实现类：
+@Service
+public class BaiduAiFace implements FaceInterface {
+String test(){.....}
+}
+
+@Service
+public class BaiduFace implements FaceInterface {
+String test(){.....}
+}
+
+工厂类：
+public class FaceHelper {
+
+   @Autoware
+   private BaiduAiFace baiduAiFace;
+   
+   @Autoware
+   private BaiduFace baiduFace;
+
+    public FaceInterface getFaceHelper(String type) {
+        if (StringUtils.isBlank(faceType)) {
+            faceType = findFaceType();
+        }
+
+        if ("BAIDU".equalsIgnoreCase(faceType)) {
+            return (FaceInterface) SpringUtil.getBean("BaiduAiFace");
+        }
+
+        if ("BAIDUAI".equalsIgnoreCase(faceType)) {
+            return (FaceInterface) SpringUtil.getBean("BaiduFace");
+        }
+
+        throw new IllegalArgumentException("不支持的人脸类型");
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 

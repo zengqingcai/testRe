@@ -104,6 +104,64 @@ python
 
 遇到问题逃避 不敢面对
 
+获取请求头信息
+@Controller
+@RequestMapping("/RequestHeader")
+public class RequestHeaderService {
+    
+    public final static String SUCCEEDD="show";
+    
+    @RequestMapping(value="/testRequestHeader",method=RequestMethod.GET)
+    public String testRequestHeader(@RequestHeader(value="item") String item){
+        System.out.println("testRequestHeader .......  ,item ="+item);
+        return SUCCEEDD;
+    }
+    
+}
+HTTP请求头Header及其作用详解
+httpReq.addHeader("myHeader", "value");
+
+
+需求：
+官网
+医药app
+医护人员app
+患者app
+
+患者
+登陆/注册 --》挂号--》付款--》选择科室--》随机获取主治医生--》医患对话--》（检查，二次对话）--》【付款，拿药，回去】--》退出
+
+医生
+
+
+
+检查（X光 ct 核共振，b超，心脑电，血液检查，尿检，等）
+
+
+健身app
+药店app
+养生app
+美食app
+
+
+jmeter
+
+https://blog.csdn.net/qq_31803503/article/details/80443864
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
