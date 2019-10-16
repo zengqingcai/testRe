@@ -143,10 +143,31 @@ httpReq.addHeader("myHeader", "value");
 养生app
 美食app
 
+id
+药品名称
+药品分类id
+药品制造商
+ct
+ut
+ctid
+utid
+enable
+
+
+id
+分类名称
+
+
+
+
 
 jmeter
 
 https://blog.csdn.net/qq_31803503/article/details/80443864
+
+
+
+
 
 
 
