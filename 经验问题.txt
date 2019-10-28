@@ -145,8 +145,8 @@ httpReq.addHeader("myHeader", "value");
 
 id
 药品名称
+药品价格
 药品分类id
-药品制造商
 ct
 ut
 ctid
@@ -157,6 +157,18 @@ enable
 id
 分类名称
 
+药品id
+分类id
+药品制造商
+出厂日期
+有效时间
+药品说明
+药效说明
+注意说明
+使用说明
+药厂地址
+二维码
+
 
 
 
@@ -164,6 +176,35 @@ id
 jmeter
 
 https://blog.csdn.net/qq_31803503/article/details/80443864
+
+系统用户
+普通用户
+商家用户
+合作用户
+医生对象
+医师资格证对象
+
+话题:
+
+
+id phone password available 
+
+
+
+order
+  Stssalesvoucherdetailstab.
+  Stssoldtickettab
+
+
+phone
+password
+salt
+
+
+
+
+
+
 
 
 

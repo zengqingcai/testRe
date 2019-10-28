@@ -421,8 +421,10 @@ springboot多线程执行定时任务
 springboot的jvm调优
 springboot的线程池设置
 java调用.bat批文件处理
+JoinPoint 对象
 
 
+核心组成就是物联设备、网关和云端。
 
     
 

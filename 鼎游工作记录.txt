@@ -1,0 +1,117 @@
+企业邮箱
+账号：qingcai.zeng@ectrip.com
+密码：zengqc1.。6
+
+oa
+账号：http://oa.ectrip.com:9061/general/login/index.php 曾庆财
+密码：
+
+git
+账号：qingcai.zeng@ectrip.com
+密码：zengqc7问好
+
+数据库
+账号：tomcatdb/tomcatdb
+密码：220.231.216.128:1521/orcl
+
+武隆源码SVN:
+票务管理系统：    http://58.17.149.205:8880/svn/V57.Ticket/trunk
+团队申报管理系统：http://58.17.149.205:8880/svn/V57.Booking/trunk
+svn账号：km003  密码：wlkst123456
+
+
+票务系统测试：http://10.2.67.210/system/index.jsp     /var/www/apps/v57/web/   /opt/tomcat.a/logs/catalina.out
+团队系统测试：http://w.kst.com/system/index.jsp 后台
+
+测试数据库：10.2.67.211  团队kst/kst 票务kstwl/kstwl
+开发测试团队服务器        ticket-web-test       10.2.254.242       root/Ectrip@wl2015
+开发测试票务服务器        ticket-web-test       10.2.67.210        root/redhat
+开发测试数据库服务器      ticket-db-test        10.2.67.211        root/redhat    oracle/kst2016 使用同一密码管理所有账户： kst2016
+
+电信vpn    222.180.11.99       test/admin1234
+联通vpn    123.146.168.14    jimmy/redhat
+
+
+10.2.254.242 w.kst.com    旅行社申报预定
+10.2.254.242 sso.kst.com  单点登陆
+10.2.254.242 pay.kst.com  结算中心
+
+单点登陆账号：wltest001 密码：12345678
+
+ 
+产品后台：http://tomcatoto.ectrip.com/system/main.jsp  admin 12345678
+
+
+授权码管理	/provider/searchAuthCode.action
+
+武隆测试库：
+还有几张表没有：
+	SubStock
+	Reserveorderinfo
+	CYTCONSUMEDATA
+
+	
+
+表外键：
+	destination_product里面的combination_product_id指的是product里的id
+	hot_search 里的product_id 是指定那个id？
+	hot_word 里的res_id是m_show_viewpoint_components的id
+	m_bootstrap_basic 里的res_id 是product里的id  
+
+m_bootstrap_basic  二维码页面基础信息表
+	m_reservation_basic里的res_id 是product 里的id
+	order_consume_data 里的resource_id对应product 的  id 
+	order_notice里的order_code为order_info 对应里面的citypass_order_code
+	order_sub_compensate、
+	order_status_checker**  没有用到里的ticket_id是哪个？
+	order_info 里面的order_code几乎没有用的
+	company_poi里面的poi_id指的是poi的id
+	order_compensate 里面的poi_id？
+	
+	
+        建表的时候把注释写的清清楚楚的
+        如果字段有枚举也要写出来，（比如说useType 1 代表什么 2代表什么 。。。。）
+        省得去代码找
+		还有外键关联也要写清楚
+		
+        
+        在代码里面枚举紧紧挨着实体类这样容易找
+        
+
+
+预定订单成功
+发送短信给用户
+http://202.96.155.124:9901/z/v/S2WO7GDC4TI5.do   
+http://test.citygopass.cn:9909/code/S2WO7GDC4TI5    
+http://test.citygopass.cn:9909/m2/getOrderCode.do得到页面
+
+
+
+http://test.citygopass.cn:9909/m2/saveVisitDateV2.do
+
+
+一次预定订单（产生一个订单order)  对应一个旅游产品（product）   取票人 取票人手机号 产品单价 产品总价 产品门票数  计量货币
+
+
+预付订单 预约景点  出游 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

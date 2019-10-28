@@ -8,6 +8,48 @@ Invocation of init method failed; nested exception is java.lang.NullPointerExcep
 
 https://blog.csdn.net/qq_39291929/article/details/78896666
 
+<img src="/m2/crimg2.do?date=1571378719525" alt="">
+
+
+
+获取验证码：
+http://test.citygopass.cn:9909/m2/crimg2.do?date=1571378719528
+
+请求参数：
+（无）
+
+返回信息：
+得到验证码：1414
+v=gsDHKJZcPbDVJxUg5WELLLNrE7wiFoBM;vt=1571378879816; Expires=Fri, 18-Oct-2019 06:12:59 GMT; Path=/
+
+
+获取动态短信验证码
+http://test.citygopass.cn:9909/m2/sendMessage.do?mobile=13544361981&randomcode=1414
+
+请求参数：
+头信息：Cookie:v=7RKoZUHceWbL3Wb28mpl6+VdsliEpKcv;vt=1571378206456; Expires=Fri, 18-Oct-2019 06:01:46 GMT; Path=/
+手机号:13544361981
+验证码：1414
+
+返回信息：
+v="";vt=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+验证码：1414
+
+
+
+
+登陆：
+http://test.citygopass.cn:9909/m2/login.do
+
+请求参数：
+头信息：Cookie:v="";vt=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+手机号：13544361981
+短信验证码：1414
+
+
+返回信息：
+
+
 
 
 
