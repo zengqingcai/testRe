@@ -32,7 +32,12 @@ git push
 
 git reset --hard  放弃本次修改
 git pull
-
+  git stash pop：
+	从git栈中获取到最近一次stash进去的内容，恢复工作区的内容。。获取之后，会删除栈中对应的那个stash
+	由于可能会进行stash多次，git使用栈管理，我们可以使用git stash list查看所有的stash
+	stash{0} stash{1} stash{2} ==== pop{2} pop{1} pop{0}
+	
+	
 git与svn的区别
 冲突解决之后，顺序执行add，commit，push到远端
 
@@ -129,7 +134,10 @@ httpReq.addHeader("myHeader", "value");
 患者app
 
 患者
-登陆/注册 --》挂号--》付款--》选择科室--》随机获取主治医生--》医患对话--》（检查，二次对话）--》【付款，拿药，回去】--》退出
+登陆/注册 --》预约--》挂号--》付款--》选择科室--》随机获取主治医生--》医患对话--》（检查，二次对话）--》【付款，拿药，回去】--》退出  
+
+
+复诊 
 
 医生
 
@@ -172,7 +180,6 @@ id
 
 
 
-
 jmeter
 
 https://blog.csdn.net/qq_31803503/article/details/80443864
@@ -199,6 +206,41 @@ order
 phone
 password
 salt
+
+权限
+
+id
+
+
+表设计：尽量给一个默认值，不要出现null的情况，因为或许查询的时候不用判断是否为null，判断是否为null的时候是全表扫描，尽量能命中索引
+LIMIT 1避免全表扫描提高查询效率
+mysql 什么样的查询导致全表扫描
+mysq建表的注释要写清楚，特别是类型 状态 等等
+
+
+预约记录表
+挂号记录表
+短信记录表
+信息推送表
+就诊记录表
+就诊流水表
+确诊记录表
+医药订单表
+检查订单表
+省市区
+医院表
+id name province city area adress type grade 
+
+科室表
+id name hospital_id 
+
+护士表
+医生表
+药物价格表
+
+
+
+
 
 
 

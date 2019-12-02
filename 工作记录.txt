@@ -425,6 +425,120 @@ JoinPoint 对象
 
 
 核心组成就是物联设备、网关和云端。
+工作感谢：代码的规范 注释的添加 逻辑思路清晰
+整理文档记录  系统分析
+
+
+
+https://59.63.125.21:10080/upload-data/api-doc.html
+
+
+public class Test
+{
+    public static void main(String[] args) throws Exception{
+	    //64M  M=1*1024*1024b=1k*1kb
+        byte[] placeholder = new byte[64*1024*1024];
+        placeholder = null;
+        //do some  time-consuming operation
+        System.gc();
+    }
+}
+
+
+rabbit安装（windows版本）
+redis安装（Windows版本）
+
+
+920555576@qq.com
+dnzjruwrozcmbbdf
+
+app端服务器（包括前端）
+web端服务器（包括前端）
+大数据端
+游戏端
+
+
+java -jar -Xms512m -Xmx512m doctor-app-server-0.0.1-SNAPSHOT.jar --server.port=8084 --spring.profiles.active=test  
+(linux写法)-Dspring.profiles.active=prd
+
+nohup java -jar blockchain-plat-0.0.1-SNAPSHOT.jar > log.log 2>&1 &
+
+
+java -jar -Dserver.port=10000 -Dlogging.path=/var/logs xxx.jar &   
+ -- 默认在/var/logs/生成spring.log文件  
+  
+java -jar -Dserver.port=10001 -Dlogging.file=/var/logs/yyy.log yyy.jar &  
+  
+-- 指定虚拟机内存、日志文件、配置文件，启动SpringBoot项目  
+java -Xms256m -Xmx512m -jar -Dlogging.file=/var/logs/ebag-school.log LK-school-1.0.jar --spring.config.location=school-prod.yml &
+
+
+
+
+and substring(gtsp.consume_date,1,10) between #{startDate, jdbcType=VARCHAR} and #{endDate, jdbcType=VARCHAR}
+
+maven -U clean compile install -e -X -Dmaven.test.skip=true
+
+mvn package -P dev
+其中“dev“为环境的变量id, 可以自己定义， 我定义的名称为：dev,qa,pre,prod , 具体在pom.xml中的配置如下：
+<?xml version="1.0" encoding="UTF-8"?>  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
+    ......  
+    <profiles>  
+        <profile>  
+            <id>dev</id>  
+            <properties>  
+                <env>dev</env>  
+            </properties>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+            </activation>  
+        </profile>   
+        <profile>  
+            <id>pre</id>  
+            <properties>  
+                <env>pre</env>  
+            </properties>  
+        </profile>  
+        <profile>  
+            <id>prod</id>  
+            <properties>  
+                <env>prod</env>  
+            </properties>  
+        </profile>  
+    </profiles>  
+	......   
+    <build>  
+        <filters>  
+            <filter>config/${env}.properties</filter>  
+        </filters>  
+        <resources>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <filtering>true</filtering>  
+            </resource>  
+        </resources>  
+        ......  
+    </build>  
+</project>  
+
+
+1.profiles定义了各个环境的变量id
+2.filters中定义了变量配置文件的地址，其中地址中的环境变量就是上面profile中定义的值
+3.resources中是定义哪些目录下的文件会被配置文件中定义的变量替换，一般我们会把项目的配置文件放在src/main/resources下，
+像db,bean等，里面用到的变量在打包时就会根据filter中的变量配置替换成固定值
+
+
+pom.xml 指定环境切换
+pom.xml 指定仓库 镜像
+pom.xml 常用的插件（tomcat，编译，jar打包）
+
+
+
+
+
+
 
     
 

@@ -3,7 +3,7 @@
 密码：zengqc1.。6
 
 oa
-账号：http://oa.ectrip.com:9061/general/login/index.php 曾庆财
+账号：http://oa.ectrip.com:9061/general/login/index.php 
 密码：
 
 git
@@ -57,8 +57,7 @@ svn账号：km003  密码：wlkst123456
 	hot_search 里的product_id 是指定那个id？
 	hot_word 里的res_id是m_show_viewpoint_components的id
 	m_bootstrap_basic 里的res_id 是product里的id  
-
-m_bootstrap_basic  二维码页面基础信息表
+    m_bootstrap_basic  二维码页面基础信息表
 	m_reservation_basic里的res_id 是product 里的id
 	order_consume_data 里的resource_id对应product 的  id 
 	order_notice里的order_code为order_info 对应里面的citypass_order_code
@@ -76,6 +75,7 @@ m_bootstrap_basic  二维码页面基础信息表
 		
         
         在代码里面枚举紧紧挨着实体类这样容易找
+		
         
 
 
@@ -95,8 +95,159 @@ http://test.citygopass.cn:9909/m2/saveVisitDateV2.do
 
 预付订单 预约景点  出游 
 
+
+http://202.96.155.124:9900/security/login.do  分销系统 9900
+http://202.96.155.124:9901/security/login.do  票务系统 9901  dingyou  Test1234
+http://202.96.155.124:9901/m2/token/6.do 刷新日期
+
+遇到问题能解决问题
+合并代码
+分配工作
+管理人员 工作进度 
+反馈问题
+问题的请教
+
+
+
+订单号码：20191106999000002
+
+
+D:\ectrip\project\ticket\V57.Ticket\WebRoot\WEB-INF\classes
+
+保存预约：saveVisitDateV2
+
+
+1、order_create_push 预约表里面的发送状态字段有什么意义  provider_order_id字段
+
+2、 order_sub_product 里面的`push_type` tinyint(2) DEFAULT '0' COMMENT '推送状态, 默认0无意义, 1 下单推送，2 消费推送，3 预约推送',
+
+订单号：20191108999000002 
+
+order_sub_product：
+
+CREATE TABLE `order_sub_product` (
+
+  `verify_start_time` varchar(10) NOT NULL COMMENT '核销开始时间00:00:00',
+  `verify_end_time` varchar(10) NOT NULL COMMENT '核销结束时间23:56:59',
+  `verify_max_time` tinyint(4) NOT NULL COMMENT '最大核销次数',
+  `start_date` datetime DEFAULT NULL COMMENT '开始日期',
+  `end_date` datetime DEFAULT NULL COMMENT '结束日期',
+  `visit_date_string` varchar(50) DEFAULT NULL,
+  `verify_valid_date_times` int(11) DEFAULT '0',
+
  
 
+
+
+ 状态 类型等整理
+CREATE TABLE `hot_word` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `hot_search_id` int(11) NOT NULL COMMENT '热搜id',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `res_id` int(11) NOT NULL COMMENT '关联景点id',???
+  `res_name` varchar(60) DEFAULT NULL COMMENT '关联景点名称',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8
+
+
+
+m_product与product的区别
+m_product_price与product_price的区别
+
+
+
+
+ ORDER_UNUSED(0, "未使用"),
+
+    ORDER_BESPEAK_SUCCESSFUL(2, "已预约"),
+
+    ORDER_CONSUMED(3, "已使用"),
+
+    ORDER_REFUNDED(6, "已退订"),
+
+    ORDER_CANCELED(7, "已取消"),
+
+    ORDER_OVERTIME(8, "已过期"),
+
+    ORDER_BESPEAK_REFUND(9, "预约后退订");
+	
+
+VALID  可使用的   未激活
+REDEEMED 已使用的  使用完成
+PARTIALLY_REDEEMED 已部分使用的（package）  使用中
+EXPIRED 已过期的  已退订
+REVOKED 已作废的  已退订
+REDEMPTION_NOT_STARTED 使用期限尚未开始的  未激活
+？消费中、已消费，都要做核销处理 这两个是属于消费中、已消费
+RESERVED 已预定场次的   使用中
+MANUALLY_REDEEMED 客服人工使用的     使用完成
+
+
+TicketStatusType状态：
+ORDER_UNUSED(0, "未激活"),
+
+ORDER_UNUSED_OVER_TIME(1, "已失效"),
+
+//ORDER_BESPEAK_SUCCESSFUL(2, "已预约"),
+
+ORDER_CONSUMED(3, "使用完成"),
+
+ORDER_USING(4, "使用中"),
+
+ORDER_COMPLETED(5, "使用过期"),
+
+ORDER_REFUNDED(6, "已退订");
+
+
+
+
+
+
+
+新加坡pass测试:
+https://uat-api.globaltix.com
+reseller@globaltix.com
+12345
+产品：195
+测试身份证号：
+110101201003071233
+110101201003073239
+110101201003072279
+110101201003078515
+110101201003073992
+
+https://www.jd.com
+
+
+业务逻辑：
+注册 登陆 短信验证码  
+拉新活动 卡券 秒杀活动 
+第三方接口调用
+极光推送
+上传图片到linux服务器
+
+
+linux用途：图片服务器，数据库 redis rocketmq rabbitmq 后端服务 nginx网关 
+
+
+
+
+防止重复点击
+防止机器人刷单
+短信验证码的重复刷
+
+
+需求分析
+
+	
+	
+	
+	
+
+
+
+	
 
 
 
