@@ -534,9 +534,22 @@ pom.xml 指定环境切换
 pom.xml 指定仓库 镜像
 pom.xml 常用的插件（tomcat，编译，jar打包）
 
+分布式配置中心
+分布式缓存
+分布式锁
+分布式事务
+定时任务可视化
+Springboot之整合Socket连接
+springboot整合elastic search  https://blog.csdn.net/chen_2890/article/details/83757022
+
+Spring Cloud版本与Spring Boot版本之间匹配关系（冲突与匹配）
 
 
 
+
+
+idea工作记录：
+pay窗口：pay ectrip-emp citypass 
 
 
 
