@@ -240,6 +240,27 @@ linux用途：图片服务器，数据库 redis rocketmq rabbitmq 后端服务 n
 
 需求分析
 
+boolean volidateSole(String[] intKeys, Long[] intValues, String[] keys, String[] values, String tableName) {
+	String hql = "from " + tableName + " where 1=1";
+	int i;
+	if (keys != null && keys.length > 0) {
+		for(i = 0; i < keys.length; ++i) {
+			hql = hql + " and " + keys[i] + "='" + values[i] + "'";
+		}
+	}
+
+	if (intKeys != null && intKeys.length > 0) {
+		for(i = 0; i < intKeys.length; ++i) {
+			hql = hql + " and " + intKeys[i] + "=" + intValues[i];
+		}
+	}
+
+	List list = this.find(hql);
+	return list == null || list.size() <= 0;
+}
+
+
+
 	
 	
 	

@@ -549,9 +549,24 @@ Spring Cloud版本与Spring Boot版本之间匹配关系（冲突与匹配）
 
 
 idea工作记录：
-pay窗口：pay ectrip-emp citypass 
+pay窗口：pay ectrip-emp citypass miaosha_6
+order-system窗口：order-system 
 
 
+数据库：
+CREATE TABLE `t_bu_medicine_category` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `category_name` VARCHAR(100) NOT NULL COMMENT '种类编号',
+  `category_code` VARCHAR(100) NOT NULL COMMENT '种类名称',
+  `category_of` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0:中药 1:西药',
+  `status` TINYINT(4) NOT NULL DEFAULT '1' COMMENT '0:禁用 1:启用',
+  `ct` DATETIME DEFAULT NULL,
+  `ut` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `cid` BIGINT(20) DEFAULT NULL,
+  `uid` BIGINT(20) DEFAULT NULL,
+  `ava` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '0:无效 1:有效',
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='药品分类表'
 
     
 
