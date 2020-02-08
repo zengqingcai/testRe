@@ -1,6 +1,27 @@
 linux系统工作记录
+常用命令：
+快速关机 shutdown -h now
+临时关闭防火墙 service iptables stop
+
+
+
+
 centos02:
+ip:192.168.187.128
+jdk环境
+
 centos03:
+ip:192.168.187.129
+java环境
+mvn环境
+mysql数据库
+
+redis服务，
+启动方式：
+	cd /usr/local/redis/bin
+	./redis-server redis.conf
+
+
 centos04:
 centos05:
 centos06:
