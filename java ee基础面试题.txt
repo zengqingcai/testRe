@@ -17,11 +17,6 @@ LinkedHashMap：能按插入/访问顺序遍历的HashMap，线程不安全。
 ConcurrentHashMap：线程安全，锁力度细，性能较好。（相当于我们的mysql的行锁）
 Collections.synchronizedMap： 线程安全，可以接收任意Map实例。
 
-数据结构：
-List
-Set
-Map
-
 List元素去重：
 		Set<String> set = new HashSet<>();
         set.addAll(list3);

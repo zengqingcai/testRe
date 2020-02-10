@@ -6,6 +6,7 @@ springboot 学习之路 24 （集成httpclient连接池技术）
 
 
 
+
 //享元工厂角色
 class FlyweightFactory{
 
@@ -26,5 +27,10 @@ class FlyweightFactory{
 	}
 }
 
+理论知识：
 架构，高内聚低耦合
 可行易读便于维护、升级、灵活编码 提高效率（高效率低耗能）
+
+
+
+

@@ -205,6 +205,8 @@ ORDER_REFUNDED(6, "已退订");
 
 
 
+
+
 新加坡pass测试:
 https://uat-api.globaltix.com
 reseller@globaltix.com
@@ -258,6 +260,28 @@ boolean volidateSole(String[] intKeys, Long[] intValues, String[] keys, String[]
 	List list = this.find(hql);
 	return list == null || list.size() <= 0;
 }
+
+
+分析和解决一个 恶意获取手机验证码的事例：
+
+阿坝旅游反馈12月7日有一批 1473550  和 1473551 手机网段的号码恶意获取验证码 达400条，又不进行真正的用户注册。
+
+通过 数据和 系统日志分析：
+1473550  和 1473551 手机网段的 7日那天 有 221个号码 恶意获取验证码，基本每个号码 通过2个不同的IP 进行获取验证码，然后 
+这221个号码 又是通过不同的IP 进行操作的（用程序和不同的代理IP 进行恶意获取），
+
+系统防范 可以 做一下 如下限制：
+
+1、不允许通过代理 IP 上网 获取 验证码；
+java代码可以获取到各级代理的ip： 
+String  proxy_ip = getRequest().getHeader("x-forwarded-for");
+//Nginx 做http代理  时  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+String proxy_ipFromNginx = getRequest().getHeader("X-Real-IP");
+
+如果不为空（多级代理获取到的值时逗号隔开： 客户端, 代理1, 代理2, ...）就是通过代理IP上网的用户
+
+2、同一个手机号码段（前7位，一天获取验证码不能超过 50条 （最大数量可后台控制））；
+
 
 
 

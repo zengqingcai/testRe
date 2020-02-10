@@ -568,7 +568,71 @@ CREATE TABLE `t_bu_medicine_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='药品分类表'
 
-    
+
+
+
+现在的：
+D:\ProgramFile\java1.7
+原来的：
+C:\Program Files\java
+
+获取行号：
+SELECT 
+  (@rownum := @rownum + 1) AS rownum,
+  ci.* 
+FROM
+  customer_info ci,
+  (SELECT 
+    @rownum := 0) AS rn
+	
+存储过程的定义	
+DROP PROCEDURE IF EXISTS area_sele;
+DELIMITER $$
+CREATE PROCEDURE area_sele()
+    BEGIN
+    DECLARE s INT DEFAULT 0;
+     DECLARE iid INT DEFAULT NULL;
+     DECLARE ppid INT DEFAULT NULL;
+     DECLARE nname VARCHAR(255) DEFAULT NULL;
+     DECLARE ttype INT DEFAULT NULL;
+     DECLARE cur CURSOR FOR SELECT id,pid,NAME,TYPE FROM t_sys_area WHERE TYPE = 1;
+     DECLARE CONTINUE HANDLER FOR NOT FOUND SET s=1;
+     OPEN cur;
+     FETCH cur INTO iid,ppid,nname,ttype;
+     WHILE s<>1 DO
+        SELECT id,pid,NAME,TYPE FROM t_sys_area WHERE id = iid;
+	SELECT id,pid,NAME,TYPE FROM t_sys_area WHERE pid = iid;
+        -- 当s等于1时表明遍历以完成，退出循环
+        FETCH cur INTO iid,ppid,nname,ttype;
+      END WHILE;
+    END$$
+
+DELIMITER ;
+
+
+
+用户:
+用户角色关联表
+角色:
+角色权限关联表
+权限：
+
+菜单（一级菜单 二级菜单 三级菜单） 按钮 超链接
+
+
+T: id pid name type url icon sort List<T>
+
+
+[{1 0 用户管理  1 javascript:void(0) javascript:void(0) 0 [
+2 1 用户管理  2 http// http// 0[
+
+
+]
+
+]},{}]
+
+
+
 
 
 
