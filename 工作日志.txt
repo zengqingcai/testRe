@@ -1,0 +1,178 @@
+工具：
+邮箱：zeng13530561029@163.com 密码：z35..4
+      13544361981@163.com 密码：zengqc7问好0
+git  https://github.com/zengyiliang/learning/tree/master git的账号:zengyiliang 密码:zengqc7问好
+如何安装linux
+https://blog.ct99.cn/2018/06/26/vmware_workstation_14_an_zhuang_centos6_9_zong_jie.html
+linux添加java环境
+export JAVA_HOME=/usr/jdk1.8.0_211
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
+export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
+export PATH=$PATH:${JAVA_PATH}
+解压
+tar  -zxvf  jdk-8u131-linux-x64.tar.gz
+
+删除多余jar的包
+https://blog.csdn.net/learn_tech/article/details/80770710
+
+关机的命令:
+[root@www ~]# shutdown -h now
+立刻关机，其中 now 相当于时间为 0 的状态
+[root@www ~]# shutdown -h 20:25
+系统在今天的 20:25 分会关机，若在21:25才下达此命令，则隔天才关机
+[root@www ~]# shutdown -h +10
+系统再过十分钟后自动关机
+[root@www ~]# shutdown -r now
+系统立刻重新启动
+[root@www ~]# shutdown -r +30 'The system will reboot'  
+再过三十分钟系统会重新启动，并显示后面的信息给所有在在线的使用者
+[root@www ~]# shutdown -k now 'This system will reboot'  
+仅发出警告信件的参数！系统并不会关机啦！吓唬人！
+
+
+
+centos02 已经安装了git服务器
+
+实操：
+mysql安装
+rocketmq 单机安装
+ridis单机安装
+需求分析
+
+redis.conf
+requirepass  123456 
+
+
+
+
+学习类
+1、
+git的学习
+git的基本使用
+https://www.cnblogs.com/vastsum/p/5910573.html
+svn的学习
+git和svn的日常应用以及常见的问题
+git和svn的面试题
+2、
+
+linux
+02.mysql安装.avi 8分钟开始
+查看mysql
+whereis mysql
+rpm -qa|grep mysql
+卸载mysql
+yum remove mysql
+yum remove mysql*
+yum localinstall mysql57-community-release-el6-11.noarch.rpm
+yum install mysql-server
+启动mysql
+service mysqld start
+设置密码：
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root -h centos03 password 'new-password'
+
+连上数据库
+mysql -uroot -p123456 在centos03
+1、打开防火墙配置文件
+vi  /etc/sysconfig/iptables
+2、增加下面一行
+service iptables stop
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3309 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+3、重启防火墙
+service  iptables restart
+远程连接授权
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION
+查看端口是否被占用：
+netstat -nalp | grep "3306"
+
+rocketmq在windows上的使用：
+https://blog.csdn.net/yucaifu1989/article/details/80960018
+
+
+
+jdk安装：
+vim /etc/profile
+
+export JAVA_HOME=/usr/java
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
+export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
+export PATH=$PATH:${JAVA_PATH}
+
+
+source /etc/profile
+
+安装maven:
+vim /etc/profile
+export MAVEN_HOME=/usr/maven
+export MAVEN_HOME
+export PATH=$PATH:$MAVEN_HOME/bin
+
+source /etc/profile
+
+加密 
+解密
+
+oracle mysql 区别
+
+
+@CookieValue
+@RequestParam
+@RequestHeader
+
+稳定
+维护
+snowflake
+redis-benchmark
+spring-boot 打war包 放在tomcat服务器：
+添加spring-boot-starter-tomcat的provided依赖
+添加maven-war-plugin插件
+
+
+jmeter
+qps 并发
+你并发用户1000的时候 我的qps多少（一秒钟只能支持多少请求） 瓶颈出在数据库
+
+tps
+
+
+linux命令：top
+
+线程池
+连接池
+高并发的解决方案
+线程
+线程组
+
+
+只剩下 1个的时候进来了四个线程
+A用户 0
+B用户 -1
+C用户 -2
+D用户 -3
+
+缓存：空间代价换取时间效率
+减少对数据的访问
+页面缓存+url缓存+对象缓存
+页面静态化，前后端分离（缓存到了用户的浏览器上）
+静态资源优化
+cdn优化
+
+
+
+
+
+
+
+
+
+
+
+
+
+
