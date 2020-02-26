@@ -2,6 +2,7 @@ linux系统工作记录
 常用命令：
 快速关机 shutdown -h now
 临时关闭防火墙 service iptables stop
+日志快速定位
 
 
 
