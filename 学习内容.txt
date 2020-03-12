@@ -31,6 +31,116 @@ class FlyweightFactory{
 架构，高内聚低耦合
 可行易读便于维护、升级、灵活编码 提高效率（高效率低耗能）
 
+概念性的东西：mac地址
+
+
+https://blog.csdn.net/qq_37164847/article/details/88063240
+/**
+ * @description:菜单管理
+ * @author: Administrator
+ * @date: 2019-03-01 14:14
+ */
+@Data
+@TableName("sys_menu")
+public class SysMenu {
+    /**
+     * 菜单ID
+     */
+    private long menu_id;
+    /**
+     * 父菜单ID，一级菜单为0
+     */
+    private long parent_id;
+    /**
+     * 菜单名称
+     */
+    private String name;
+    /**
+     * 菜单URL
+     */
+    private String url;
+    /**
+     * 授权(多个用逗号分隔，如：user:list,user:create)
+     */
+    private String perms;
+    /**
+     * 类型     0：目录   1：菜单   2：按钮
+     */
+    private int type;
+    /**
+     * 菜单图标
+     */
+    private String icon;
+    /**
+     * 排序
+     */
+    private int order_num;
+    /**
+     * 父菜单名称
+     */
+    @TableField(exist=false)
+    private String parentName;
+
+    /**
+     * ztree属性
+     */
+    @TableField(exist=false)
+    private Boolean open;
+
+    /**
+     * 子菜单
+     */
+    @TableField(exist=false)
+    private List<SysMenu> childMenus;
+
+}
+2.
+
+// 原始的数据
+List<SysMenu> sysMenuList=sysMenuDao.queryMenuList(role_id);
+// 最后的结果
+List<SysMenu> newMenuList = new ArrayList<>();
+// 先找到所有的一级菜单
+for (int i = 0; i < sysMenuList.size(); i++){
+    SysMenu sysMenu=sysMenuList.get(i);
+    Long parent_id=sysMenu.getParent_id();
+    // 如果是顶级菜单，没有父菜单
+    if (parent_id==0){
+        newMenuList.add(sysMenu);
+    }
+}
+// 为一级菜单设置子菜单，getChild是递归调用的
+for (SysMenu menu : newMenuList) {
+    menu.setChildMenus(getChild(menu.getMenu_id(), sysMenuList));
+}
+//    递归查找子菜单
+private List<SysMenu> getChild(long id, List<SysMenu> rootMenu) {
+    // 子菜单
+    List<SysMenu> childList = new ArrayList<>();
+    for (SysMenu menu : rootMenu) {
+        // 遍历所有节点，将父菜单id与传过来的id比较
+        if (menu.getParent_id()==id) {
+            childList.add(menu);
+        }
+    }
+    // 把子菜单的子菜单再循环一遍
+    for (SysMenu menu : childList) {
+        // 没有url子菜单还有子菜单
+        if (menu.getUrl()==null) {
+            // 递归
+            menu.setChildMenus(getChild(menu.getMenu_id(), rootMenu));
+        }
+    } // 递归退出条件
+    if (childList.size() == 0) {
+        return null;
+    }
+    return childList;
+
+}
+
+通过HttpServletRequestWrapper获取请求的数据
+
+
 
 
 

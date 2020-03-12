@@ -179,5 +179,66 @@ Zuul适合微服务中实现网关 粒度更小的过滤
 易于认证。可以在网关上进行认证，然后再将请求转发到后端的微服务，而无须在每个微服务中进行认证。
 减少了客户端与各个微服务之间的交互次数。
 
+nginx的设置
+连接数 请求数
+IP的黑白名单
+接口的频繁访问限制
+最大并发数
+限流 降级 加权 集群 反向代理 http服务器 图片服务器 邮件发送服务器
+
+设置黑名单：
+新建文件bankip.bak ==> deny 127.0.0.2
+http{
+include bankip.bak;
+....
+}
+
+白名单设置，访问根目录 
+location / {
+	allow 123.34.22.155;
+	allow 33.56.32.1/100;
+	deny  all;
+}
+
+黑名单设置，访问根目录 
+location / {
+	deny 123.34.22.155;
+}
+
+特定目录访问限制
+location /tree/list {
+	allow 123.34.22.155;
+	deny  all;
+}
+
+nginx 限制ip请求某个url的频率
+limit_req_zone $binary_remote_addr zone=query:10m rate=1r/s; 其中rate=1r/s 的意思是每个地址每秒只能请求一次
+
+概念：
+
+nginx设置请求超时时间
+nginx设置线程数
+nginx设置接口鉴权
+nginx设置最大并发数/连接数
+Nginx配置upstream并且实现负载均衡
+nginx设置负载权衡（轮询，加权，随机）nginx负载均衡的5种策略及原理
+nginx进程数 worker_processes 工作进程数； worker_connections，单个工作进程可以允许同时
+通过 ps -elf | grep nginx 找到 nginx 的worker进程ID
+Nginx的worker_processes、worker_connections设置
+（进程与线程的区别以及联系）
+
+limit_req_zone 用来限制单位时间内的请求数，即速率限制,采用的漏桶算法 "leaky bucket"
+limit_req_conn 用来限制同一时间连接数，即并发限制
+https://www.cnblogs.com/zhoulujun/p/12183179.html
+ngx_http_core_module、
+ngx_http_limit_conn_module
+以及ngx_http_limit_req_module中的limit相关配置参数。
+https://blog.csdn.net/qq_42303254/article/details/89517365
+
+
+
+
+
+
 
 

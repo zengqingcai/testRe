@@ -1,6 +1,10 @@
 对称加密（非对称加密） 数字签名
 加密的好处与坏处（速度会慢 需要大量运算）
 高等级的数据（又签名 又要加密）
+甲方（a私钥 b公钥）  乙方（b私钥 a公钥）
+甲方把公钥给乙方 乙方把公钥给甲方
+甲方拿a私钥加签 b公钥加密 发给乙方
+乙方拿a公钥验签 b私钥解密 获取数据
 
 数据的通信安全：
 加密方式：
@@ -72,14 +76,7 @@ RSA AES加密
 非对称加密算法使用公钥加密，私钥解密，私钥签名，公钥验签。
 
 Saas模式
-
-
 23种模式：代理模式 适配器模式
-
-
-
-git账号：
-163邮箱：
 
 
 定义了一个list，该list的数据类型是NameValuePair（简单名称值对节点类型），这个代码多处用于Java像url发送Post请求。在发送post请求时用该list来存放参数。
@@ -125,7 +122,17 @@ app
 
 CDN缓存机制
 
+springcloud和springboot版本配套
+spring cloud 实例的创建
+https://blog.csdn.net/qq_44575680/article/details/90290092
+spring-security的permitAll()和anonymous()是什么区别
 
+代码合法性判断（请求地址啊 请求参数 过滤ip 过滤接口访问频次）
+jvm内存标记
+redis访问
+mq中间件（雪峰填谷）
+db访问
+代码的重复使用（复用）reuse
 
 
 
