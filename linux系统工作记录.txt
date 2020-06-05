@@ -6,7 +6,7 @@ linux系统工作记录
 
 
 
-
+https://www.cnblogs.com/fengyumeng/p/11133924.html
 centos02:
 ip:192.168.187.128
 jdk环境
@@ -24,6 +24,7 @@ redis服务，
 
 
 centos04:
+
 centos05:
 centos06:
 
