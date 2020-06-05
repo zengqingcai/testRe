@@ -7,20 +7,59 @@ http://DESKTOP-V15JKM4/svn/Test/Zeng/
 
 cat -n ectrip_log.2020-02-21.out |tail -n +400|head -n 200
  表示从第400行开始往后查询200行数据
+ cat -n linux.txt |tail -n +20|head -n 100 |grep err
+ 
  
 cat -n test.log |grep "查找的错误关键字"并且显示行号
 
 tail
-tail  -n  10  test.log   查询日志尾部最后10行的日志;
-///tail -n 500 ectrip_log.2020-02-21.out 最后500行并且显示行号
-tail -n +10 test.log    查询10行之后的所有日志;
+tail -n  10 test.log | grep   -- '关键字'   查询日志最后10行的日志;       显示行号(常用的)
+tail -n 6000  catalina.out |more -100 可以进行多屏显示(ctrl + f 或者 空格键可以快捷键)
+tail -n +10 test.log                        查询日志第10行之后的所有日志; 显示行号;
 
 head
-head -n 10  test.log   查询日志文件中的头10行日志;
-head -n -10  test.log   查询日志文件除了最后10行的其他所有日志;
+head -n  10  test.log   查询日志文件中的头部10行日志;
+head -n -10  test.log   查询日志文件（除了最后10行）的其他所有日志;
 
 less cms-service_error.2018-12-19.7.log|grep 'error'
 less sys-config.log |grep -100 1c4d1792f401a8330000
 
 cat -n ectrip_log.2020-02-21.out |grep 'checkTicket' |tail -n +400|head -n 200
 tail -n 500 ectrip_log.2020-02-21.out|grep 'eyJhY2NpZCI6IjMiLCJnYXJkZW5p'
+8.根据日期时间段查询(前提日志总必须打印日期,先通过grep确定是否有该时间点)
+sed -n '/2018-06-01 16:00:20/,/2018-06-01 16:06:36/p' app.log
+9.使用more和less命令(分页查看,使用空格翻页)
+cat -n app.log |grep "error" |more
+10.吧日志保存到文件
+cat -n app.log |grep "error" > temp.txt
+11.将指定时间的日志导入到文件中
+cat -n logs/catalina.out '/2018-06-08 00:00:20/,/2018-06-06 16:06:36/p' > pay.out
+
+
+
+
+test  err 1234
+exception null
+cat -n linux.txt |tail -n +20|head -n 100 |grep err
+less linux.txt|grep 'error'
+
+
+
+sed -n '/2020-05-01 16:29:08/,/2020-05-01 16:29:39/p' ectrip_log.2020-05-01.out
+
+tail -fn 1000  ectrip_log.2020-05-01.out
+
+
+tail -n 6000  ectrip_log.2020-05-01.out |more -100 
+
+
+linux下history命令显示历史指令记录的使用方法
+ history 10
+ history |grep tail
+ 逐屏列出所有的历史记录：
+ history | more
+立即清空history当前所有历史命令的记录
+history -c
+以下看所有的重启、关机记录
+last | grep reboot
+last | grep shutdown

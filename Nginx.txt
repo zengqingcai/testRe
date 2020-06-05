@@ -116,6 +116,15 @@ upstream linuxidc {
   server 10.0.0.11:9090 down; 
   server 10.0.0.11:8080 weight=2 max_fails=2 fail_timeout=60s;
   server 10.0.0.11:6060; 
+  server 10.0.0.11:8888; 
+  server 10.0.0.11:7070 backup; 
+}
+
+upstream linuxidc2 { 
+  server 10.0.0.11:9090 down; 
+  server 10.0.0.11:8080 weight=2 max_fails=2 fail_timeout=60s;
+  server 10.0.0.11:6060; 
+  server 10.0.0.11:8888; 
   server 10.0.0.11:7070 backup; 
 }
 2.  将server节点下的location节点中的proxy_pass配置为：http:// + upstream名称，即“
@@ -123,15 +132,35 @@ http://linuxidc”.
 
 server {
 listen       80;
-server_name  186.15.144.199;
+server_name  186.15.144.199;对应 www.zeng.con
 
 location / { 
 		root  html; 
 		index  index.html index.htm; 
 		proxy_pass http://linuxidc; 
 }
+
+server {
+listen       81;
+server_name  186.15.144.199;对应 www.zeng.con
+
+location / { 
+		root  html; 
+		index  index.html index.htm; 
+		proxy_pass http://linuxidc2; 
+}
 请求跳转：
 www.zeng.con =====DNS===>>  186.15.144.199:80 ====Nginx=====>>http://linuxidc =====upstream===>>http://10.10.10.108:8888 ===gateway===>>webservice
+  key               value
+www.zeng.con  186.15.144.199:80
+img.zeng.con  186.15.144.199:81
+app.zeng.con  186.15.144.199:88
+
+Get请求
+www.zeng.con/user/findUserByParams?job=后端开发&kw=php&random=202005221007569qac1564
+等同于：
+10.0.0.11:6060/user/findUserByParams?job=后端开发&kw=php&random=202005221007569qac1564
+
 
 修改nginx配置文件，nginx.conf
 增加 work_rlimit_nofile 和 worker_connections 数量，并禁用keepalive_timeout。

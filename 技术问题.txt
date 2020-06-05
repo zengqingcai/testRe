@@ -91,12 +91,197 @@ https://59.63.125.21:10080/upload-data/api-doc.html
 缓存方面（添加缓存）
 
 
+遇到的打包问题：
+
+ly-item-interface在打包时要依赖com.leyou.common包
+就很奇怪 明明这个包这个类都是存在的啊，为什么就是找不到？？？
+其次做了几项检查：
+
+pom.xml依赖是否成功引入或者存在不存在单词拼写错误（一般情况不会有错啊）
+common包中dto是否成功import （这么简单必然成功import了啊…）
+
+2 解决办法
+
+最终原因，其实就是没有依赖。。。原因就是spring-boot-maven-plugin
+这个坑！！！用这个插件打包的Jar包可以直接运行，但是不可依赖！！！所以interface自始至终就没有依赖，自然会说找程序包不存在或者找不到类
+
+最后修改pom.xml的依赖：
+
+ <build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <classifier>execute</classifier>
+            </configuration>
+        </plugin>
+    </plugins>
+ </build>
+
+3 总结
+一个微服务通常有两个子module，一般一个写实体类和接口一个写实现方法
+
+建议
+
+common类或者实体类或者被被依赖的类，打包插件配置为：
+
+<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classifier>execute</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+</build>
+注意：
+<executions>
+    <execution>
+        <phase>none</phase>
+    </execution>
+</executions>
+
+是为了解决Unable to find main class的问题，当然，如果写了简单的main函数这几行可以不写~
+
+其他类或者微服务可以正常配置：
+<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+</build>
+
+
+post请求
+function post(url, params) {
+    // 创建form元素
+    var temp_form = document.createElement("form");
+    // 设置form属性
+    temp_form .action = url;      
+    temp_form .target = "_self";
+    temp_form .method = "post";      
+    temp_form .style.display = "none";
+    // 处理需要传递的参数 
+    for (var x in params) { 
+        var opt = document.createElement("textarea");      
+        opt.name = x;      
+        opt.value = params[x];      
+        temp_form .appendChild(opt);      
+    }      
+    document.body.appendChild(temp_form);
+    // 提交表单      
+    temp_form .submit();     
+}
+这里相当于做了一个隐藏的一次性使用的表单，该表单的提交方式是post，这样就完美的解决了参数过长的问题。
+window.location.href="/user/goUserPsInfoEdit";
+这里是get请求
+
+
+统一controller层处理异常
+java  怎么全局统一处理异常
+https://blog.csdn.net/xiaozm1223/article/details/89237931
+
+添加全局异常处理类 https://blog.csdn.net/cc_want/article/details/80550415
+
+
+业务
+解决方案
+思路
+场景
+
+
+乐观锁：
+select * from user where id =1 
+
+update user set name = 'jame' where id = 1 
+
+update user set version = version + 1 where version=old_version(1) and id = 1
+如果这里不等于1
+就回滚（成本大）
+
+悲观锁
+select * from user where id = 1 for update
+
+update user set name = 'jame' where id = 1 
 
 
 
 
+SELECT  gate.*
+FROM account account,sms_gateway gate 
+WHERE account.type=1 AND account.id = gate.`account_id` 
+AND gate.gateway_id=4
+
+UPDATE sms_gateway SET gateway_id = 4 WHERE gateway_id=8 AND EXISTS(SELECT NULL FROM account acc WHERE acc.id = account_id 
+AND acc.type=1)
+
+子线程抛出异常和主线程事务回滚
+大事务 小事务 锁
 
 
+
+java中锁与@Transactional同时使用导致锁失效的问题
+@Transactional
+public void update(int id) {
+	boolean lock = redisLock.lock(id);
+	if (!lock) {
+		throw new RuntimeException("当前人数过多，请稍后再试");
+	}
+	/*
+	  业务代码在该区域
+	 */
+	updateAccountFinance(id,14)//给这个用户的账户添加14块钱
+	redisLock.unlock(id);
+}
+用户本来100
+第一次添加14  114
+
+第二次添加14  128（114）
+
+
+事务提交后才释放锁
+而不是事务还没提交就释放锁
+@RequestMapping("/execute")
+public void execute(int id) {
+	boolean lock = redisLock.lock(id);
+	if (!lock) {
+		throw new RuntimeException("当前人数过多，请稍后再试");
+	}
+	service.update(id);
+	redisLock.unlock(id);
+}
+
+@Transactional
+public void update(int id) {
+	/*
+	  业务代码在该区域
+	 */
+}
+
+小程序开发
+小程序开发指南
+https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/code.html#JS-逻辑交互
+小程序账户：
+13544361981@163.com
+zengqc7问好
+也可以微信扫描登陆 https://mp.weixin.qq.com/wxamp/devprofile/get_profile?token=27141648&lang=zh_CN
+开发者工具
+云服务器：https://cloud.tencent.com/act/southwest?fromSource=gwzcw.3196337.3196337.3196337&utm_medium=cpc&utm_id=gwzcw.3196337.3196337.3196337
+
+https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html  开发者开发指南文档
+微信小程序域名设置
+https://cloud.tencent.com/developer/article/1483573
+小程序如何配置服务器
 
 
 

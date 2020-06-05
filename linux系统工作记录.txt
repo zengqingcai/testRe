@@ -11,7 +11,7 @@ centos02:
 ip:192.168.187.128
 jdk环境
 
-centos03:
+CENTOWS03:
 ip:192.168.187.129
 java环境
 mvn环境
@@ -26,3 +26,19 @@ redis服务，
 centos04:
 centos05:
 centos06:
+
+
+redis启动：D:\ProgramFile\redis
+
+1C66D656159D976CB19462A537B8F38C
+
+admin原来的密码 13788C0C13AD47C7BCBB3A792024CD1F
+
+mpfxs1原来的密码 13788C0C13AD47C7BCBB3A792024CD1F
+
+
+SELECT * FROM account WHERE english_name='mpfxs1'
+
+
+UPDATE account SET PASSWORD = '13788C0C13AD47C7BCBB3A792024CD1F' WHERE english_name='mpfxs1'
+

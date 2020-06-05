@@ -631,6 +631,13 @@ T: id pid name type url icon sort List<T>
 
 ]},{}]
 
+@Autowired byType 通过类型来注入（一个接口一个实现类）
+@Resource 或 @Qualifier byName 通过名称（一个接口多个实现类）
+自定义feign配置与服务调用的安全验证
+	https://www.jianshu.com/p/755b15ff0249
+	302是重定向问题
+	
+
 
 
 

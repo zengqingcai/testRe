@@ -139,6 +139,238 @@ private List<SysMenu> getChild(long id, List<SysMenu> rootMenu) {
 }
 
 通过HttpServletRequestWrapper获取请求的数据
+缓存击穿
+缓存穿透
+缓存雪崩
+
+数据库：
+索引：b-树 b+树
+索引就是排好序的数据结构，可以帮助我们快速的查找到数据（不用全表扫描，本质上就是一种数据结构）
+
+默认结构 1 23 45 8 3 11 24 112 7（乱序 先添先进）
+二叉树：左小右大
+红黑树：在二叉树的基础上多了树平衡，也叫二叉平衡树
+但是mysql索引的数据结构并不是红黑树，因为如果数据量大了之后，树的高度就会很大。
+20200502000000001
+
+110101199003070716
+110101199003073239
+110101199003071831
+110101199003074434
+110101199003076413
+
+30*20
+600
+142637
+146037
+
+
+github.com
+
+
+
+
+
+活动：
+用户活动
+医生活动
+
+黑名单
+id
+type 活动类型
+user_id
+user_type
+description
+
+
+
+
+活动集合表：
+id
+活动唯一编码
+活动名称
+活动描述
+活动条件
+活动库存
+活动库存单位（次 张 次/天 次/月 次/用户）
+活动有效期
+活动开始时间
+活动结束时间
+活动状态：-1禁用 1启用
+是否可以叠加使用
+
+
+活动奖品表
+id
+活动唯一编码
+奖品代号
+奖品名称
+奖品描述
+
+
+
+活动用户关联表
+id
+user_id   用户id
+user_type 用户类型
+活动编号
+活动奖品id
+
+用户积分表
+id
+user_id
+
+
+
+
+
+
+新人活动：获取0.88-8.88元的红包
+今日活动：获取满100减5 获取50积分 80积分 180积分 以及0.88到6.88现金红包
+
+
+
+450821198805271277
+450821198805279439
+450821198805274590
+450821198805273870
+450821198805270039
+450821198805279498
+450821198805276537
+450821198805279017
+450821198805270338
+45082119880527497X
+
+
+142637
+146037
+
+3400
+
+C:\Program Files\java
+D:\ProgramFile\java1.7
+D:\ProgramFile\java
+
+
+业务流程：
+（查找数据）登陆成功 -》 发短信 -》推送 -》更改数据库-》积分增加-》今日活动（是否有活动）
+注册成功-》发短信-》发推送-》入库-》积分增加-》新人活动
+订单创建
+订单已支付-》创建物流订单-》积分添加-》支付订单生成-》库存减少
+
+
+活动：获取活动卡卷
+积分：增加积分
+
+
+//活动信息的添加
+{
+  "activityCode": "活动编码",
+  "activityCondition": "活动条件",
+  "activityDesc": "活动描述",
+  "activityEnd": "2020-08-08 06:34:45",
+  "activityIsSuper": 0,
+  "activityName": "活动名称",
+  "activityStart": "2020-05-08 06:34:45",
+  "activityStatus": 1,
+  "activityStock": 100,
+  "activityStockUnit": 1,
+  "activityType": 1,
+  "ava": 0,
+  "cid": 0,
+  "id": 0,
+  "uid": 0
+}
+
+//添加活动奖品
+{
+  "activityCode": "4f0d744b-b1d2-48f6-8681-d9bccae95575",
+  "ava": 1,
+  "cid": 1,
+  "id": 0,
+  "prizesDesc": "奖品描述",
+  "prizesEnd": "2020-09-09 01:41:05",
+  "prizesExpira": 0,
+  "prizesName": "满100减5卡卷",
+  "prizesStart": "2020-05-09 01:41:05",
+  "prizesStatus": 0,
+  "uid": 1
+}
+
+//修改奖品
+{
+  "id": 1,
+  "prizesDesc": "奖品描述111",
+  "prizesEnd": "2020-12-09 01:41:05",
+  "prizesExpira": 10,
+  "prizesName": "满100减5卡卷11",
+  "prizesStart": "2020-05-09 01:41:05",
+  "prizesStatus": 1
+}
+
+rocketmq的封装
+https://www.jianshu.com/p/f57de40621a0
+
+中秋节活动随机获取：
+1、获取满100减5卡卷
+2、 获取50积分 
+3、80积分 
+4、180积分 
+5、0.88
+6、1.88
+7、2.88
+8、3.88
+9、4.88
+10、5.88
+11、6.88现金红包
+
+积分的添加
+10分
+
+
+
+user_id
+活动编号 参与活动的编号
+
+
+user_id
+isNew 是否是新用户
+isLogin 今日首次登陆
+
+
+
+ui
+jvm
+cache
+es
+database
+springboot代理服务
+ServletRegistrationBean的注入
+
+Spring boot使用ProxyFilter进行服务代理
+https://www.jianshu.com/p/d6e9b1c211dd
+
+http://gitlab.cytjingqu.com/
+http://gitlab.jingqu.cn
+
+
+散列数组+链表
+哈希表
+
+
+hash索引
+二叉树：二叉查找树
+红黑树：在二叉树的基础上多了树平衡，也叫二叉平衡树或者平衡二叉树
+b-树:平衡多路查找树
+b+树
+
+页面渲染 网络传输 程序处理 数据库的数据读写
+
+
+select MOR.*  from CUSTOM c,M_ORDER mor where c.usid=mor.usid and  c.usid='dcmeituan' 
+
+SELECT * FROM T_ORDER where usid='dcmeituan'
+
 
 
 
