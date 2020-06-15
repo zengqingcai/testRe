@@ -1,17 +1,3 @@
-
-public static <T> List<T> set2List2(List<T> list,T t) {
-
-	list.add(t);
-	return list;
-}
-
-public static <T> T set2List(T set) {
-
-	List<T> list = new ArrayList<>();
-	list.add(set);
-	return set;
-}
-
 Java内存管理
 高并发
 多线程
@@ -19,7 +5,6 @@ Java内存管理
 	    而是只通过其他应用层service调用返回结果
 	
 23种java设计模式:
-
 
 java的4个特性：抽象 多态 继承 封装
 代码的优化：低耗高效 可复用 可便于维护 可伸缩(插拔) 易读好理解  
@@ -36,21 +21,6 @@ java的4个特性：抽象 多态 继承 封装
 异步
 
 
-项目管理，测试流程管理
-tapd
-jira
-
-linux命令
-1、查找命令：
-find  where  locate  whereis  which
-2、文件状态
-
-
-ps process show
-kill -9 123456
-whereis locate which find
-w who whois whoami
-scp cp mv
 
 
 高并发解决方案
@@ -61,17 +31,6 @@ scp cp mv
 Java 网络IO编程总结（BIO、NIO、AIO均含完整实例代码）
 socket
 
-
-写个工具类
-根据开始时间和结束时间返回时间段内的时间集合
-list 根据一个到多个属性排序
-list groupby
-list 求和
-list groupby sum
-list 去重
-对象的equals hashcode
-HashSet HashCode表机构存储
-TreeSet 数机构存储
 
 相同点：
 
@@ -103,11 +62,13 @@ TreeSet 数机构存储
 
 日志的重要性
 
-前端
-后端
+前端bug
+后端bug
 全局环境
-网络
+网络传输
 前后传参不一致:格式 数据不一致
+业务逻辑的串联
+
 
 
 前端给我的尽量用字符串类型接收
@@ -117,21 +78,6 @@ TreeSet 数机构存储
 
 别人用业务逻辑（尽可能保留扩展的余地）
 自己本身需要的业务逻辑
-
-svn知识：
-svn copy http://.../trunk/ http://..../branches/branchesname -m "注释信息";
-分支合主干（合并分支新功能代码到主干）
-主干合分支
-（由于长期的独立开发，可能会在合并回主线时出现较多的冲突。所以在支线上开发间期如果发现主干有更新，而且这个更新有可能将来跟你产生冲突，那你可以先将主线的内容合并到分支上。
-已免等到做了大量修改再来更新。）
-拉分支
-checkout
-revert
-conflict：
-kingtuns.txt.r101
-kingtuns.txt.r102
-kingtuns.txt.mine
-kingtuns.txt。
 
 
 
@@ -152,22 +98,6 @@ xml命名规范尽量看得懂
 
 沟通很重要：
 例子：推送数据格式，app传输格式，业务数据字段定义，调用错误的接口
-
-
-List map排序:
-Collections.sort(list, new Comparator<TestAccount>() {
-		@Override
-		public int compare(TestAccount ta1, TestAccount ta2) {
-			return ta2.date.compareTo(ta1.date);
-	}});
-
-List<Object>去重:
-set distinct
-groupby:
-Map<Boolean, List<Integer>> collectGroup = Stream.of(1, 2, 3, 4).collect(Collectors.groupingBy(it -> it > 3));  
-
-
-
 
 json数组对象 json单体对象 map list javaben实体对象 String  jsonString 
 
@@ -856,6 +786,7 @@ public class MemberFilter implements Filter {
 迭代新的版本的时候，对于方法只能增不能改（为了兼容旧版本）
 
 nohup java -jar -Dspring.config.location=/etc/xhg/xhg-sys-config/application.properties /data/psrecycle/xhg-sys-config-1.0.4.jar 2>/data/logs/xhg-sys-config/xhgsysconfigerr.out 1>/data/logs/xhg-sys-config/xhgsysconfigstd.out &
+
 nohup java -jar -Dspring.config.location=/etc/xhg/xhg-boss/application.properties /data/psrecycle/xhg-boss-1.1.6.jar 2>/data/logs/boss/bosserr.out 1>/data/logs/boss/bossstd.out &
 
 
@@ -923,17 +854,6 @@ enum BoxStatusEnum {
 	}
 }
 
-项目开发
-
-
-
-月报：
-营销短信的批量发送。
-微服务改造
-rbac优化
-
-
-
 
 项目的构建：
 maven的循环依赖 双向依赖 相互依赖
@@ -941,42 +861,6 @@ java项目内存(static)
 redis缓存。
 持久化存储。
 版本合并合并代码丢失
-
-业务规则
-
-
-预算资金：3万
-预算时间：1个月
-学习：
-mqtt 
-需求：一份需求文档
-计划：
-	公益网站
-	公益app应用
-	英文学习
-	英文电影
-	英文音乐
-	
-	
-
-	
-28000
- 3000
- 1000
- 1600
-  200
-  300
-  
-~~~ 35000
-
-order by updated_time desc
-	
-	
-
-测试环境：
-10.10.10.41  test5           dev/dev201808!
-10.10.10.42  test6           dev/dev201808!
-10.10.10.43  test7           dev/dev201808!
 
 
 契约   springcloud
@@ -1213,14 +1097,6 @@ key的命名规范
 
 尽可能的做到所有会出现问题的地方容错处理
 
-喝点薏米红豆粥
-山药排骨汤
-冬瓜薏米排骨汤
-苦瓜
-茯苓
-冬时萝卜夏吃姜，不用医生开药方
-赤小豆、白扁豆、薏苡仁、木棉花、芡实、川萆薢、茯苓、百合、莲子、砂仁、法夏等等。一些爱好冬泳的人每天都会用芡实、薏苡仁、茯苓、百合、赤小豆打成粉后煮粥喝，这些中药对祛除体内淤滞较多湿气很有效果，同时又健脾养胃。
-鸡蛋 
 
 a={production:!0,hostUrl:"http://10.10.10.95:8083/boss"}
 liuhui xhg2018#
@@ -1263,21 +1139,6 @@ xhg-cms-service-1.0.9.jar
 
 
 前后端代码 网络 配置文件 数据库 缓存问题
-
-
-
-西红柿
-橙子
-苹果
-葡萄
-橘子
-
-趾高气昂、气宇轩昂、不可一世、得意洋洋、沾沾自喜、盛气凌人、自以为是、目空一切、耀武扬威、
-自命不凡、洋洋自得、踌躇满志、大摇大摆、眉飞色舞、扬眉吐气、自鸣得意、得意扬扬、大模大样、器宇轩昂、神气活现、
-颐指气使、洋洋得意、得意忘形、高视阔步、春风得意
-
-
-
 
 
 
@@ -1741,13 +1602,52 @@ id
 方法实参：
      抽象类的继承类，接口的实现类，子类（后代类）
 
-idea创建一个本地分支，然后远程同步创建一个分支 
-第一步
-创建本地分支
-第二步
-填写分支名称，创建即可。
-第三步
-推送到远程的时候，自动会弹出一个同名分支。
+	 
+	 
+
+资料整理：
+视频（hl）
+视频（技能学习视频，请添加备注）
+视频（娱乐）
+
+图片收集（生活图片）
+图片（技术图片）
+
+开发工具（idea，eclipse）
+
+第三方可运行开发辅助软件（如Notepad++ 有道翻译 XMind）
+
+第三方开发服务器（redis mysql mongodb es）
+
+可运行项目
+
+开发项目（正在进行中）
+
+知识学习：
+    笔录：笔记草稿，混杂一起
+	技术概念
+	linux系统知识
+	windows系统知识
+	生活知识：生活概念 
+	日常沟通话题场景
+	工具网站集合
+	技术网站集合
+	正式环境的集合
+	微信小程序
+	
+	
+[
+ {"id":1,"name":"用户管理","url":"","items":[{"id":11,"name":"系统用户","url":"","items":[]},{..普通用户..},{..医护人员..}]},
+ {"id":2,"name":"广告管理","url":"","items":[{},{},{}]
+}]
+
+
+id pid name url type(菜单10 11 12 按钮2 超链接3）icon system department sort status desc code items
+	
+springboot全家桶
+
+
+jdk1.8.0_181/bin/java -jar hangzhou-travel-data-1.0.jar --logging.config=./logback.xml &
 
 
 

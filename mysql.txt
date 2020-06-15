@@ -1,21 +1,23 @@
 mysql的最优化方案
-阶段：一、表设计阶段 https://www.cnblogs.com/zhangwuji/p/8110916.html（表结构优化）
-               避免空值 默认值的设置
-			   类型选择（字符varchar长度设置 数字表示中文） 
-			   大类型的限制使用 
-			   多字段的大表尽量拆分成主表和从表
-			   三范式的遵循：1、每一列属性都是不可再分的属性值，确保每一列的原子性（所有关系型数据库系统都满足第一范式数据库表中的字段都是单一属性的，不可再分）
-							 2、每一行的数据只能与其中一列相关，即一行数据只做一件事（数据库表中的每个实例或行必须可以被惟一地区分）
-							 3、数据不能存在传递关系，即每个属性都跟主键有直接关系而不是间接关系
+阶段：
+一、表设计阶段 https://www.cnblogs.com/zhangwuji/p/8110916.html（表结构优化）
+避免空值 默认值的设置
+类型选择（字符varchar长度设置 数字表示中文） 
+大类型的限制使用 
+多字段的大表尽量拆分成主表和从表
+三范式的遵循：
+         1、每一列属性都是不可再分的属性值，确保每一列的原子性（所有关系型数据库系统都满足第一范式数据库表中的字段都是单一属性的，不可再分）
+		 2、每一行的数据只能与其中一列相关，即一行数据只做一件事（数据库表中的每个实例或行必须可以被惟一地区分）
+		 3、数据不能存在传递关系，即每个属性都跟主键有直接关系而不是间接关系
 			   
-      二、表使用中
-	    联表查询的时候关联字段要创建索引 
-		优化查询语句 sql语句尽量的简捷 尽量命中索引
-        尽量单表查询 避免join （如果join也要添加索引）		
-	  三、表数据量大的时候 
-	  1、读写分离  
-	  2、大表拆分 
-	  3、分库分表
+二、表使用中
+联表查询的时候关联字段要创建索引 
+优化查询语句 sql语句尽量的简捷 尽量命中索引
+尽量单表查询 避免join （如果join也要添加索引）		
+三、表数据量大的时候 
+1、读写分离  
+2、大表拆分 
+3、分库分表
 一、mysql 函数/存储过程/视图/触发器/表/外键
 表设计的原则：
 表：表与表之间的关系，一对一 一对多 多对多（需要中间表）
@@ -59,6 +61,7 @@ mysql的最优化方案
 4）存储过程一般是作为一个独立的部分来执行（ EXECUTE 语句执行），而函数可以作为查询语句的一个部分来调用（SELECT调用），
 由于函数可以返回一个表对象，因此它可以在查询语句中位于FROM关键字的后面。 SQL语句中不可用存储过程，而可以使用函数。
 
+视图：
 视图是数据库中由真实的数据表通过查询语句定义而成的一种虚拟表，视图本身不存储数据只是存储查询数据的定义
 （视图是虚拟的表，与包含数据的表不一样，视图只包含使用时动态检索数据的查询）
 （1）. 比如你程序发送查询语句给数据库服务器的时候，用视图传输的语句字节数更少
@@ -199,6 +202,159 @@ zuul getewag
 分表分库（策略）
 
 验证机制 补偿机制
+
+
+mysql的索引存储结构：
+二叉索引树
+红黑树
+b树
+b+树
+建立索引的目的是可以大大加快了数据的查询速度
+并不是索引越多越好，需要维护，创建（对写操作变得慢）
+创建索引时使用的索引方式,有btree和hash两种
+CREATE INDEX id_index ON lookup (id) USING BTREE;
+
+springboot的读写分离设置（以及数据的同步）
+分库分表
+大表拆分
+
+
+*mysql的执行顺序
+mysql语句解析：http://www.cnitblog.com/aliyiyi08/archive/2008/09/09/48878.html
+重要指数（参数）
+type这列很重要,显示了连接使用了哪种类别,有无使用索引.
+从最好到最差的连接类型为const、eq_reg、ref、range、indexhe和ALL 其中system
+这是const联接类型的一个特例。表仅有一行满足条件.如下(t3表上的id是 primary key)
+
+字段变动不大的，尽量不用键索引；例如性别 启用禁用状态
+
+
+mysql 不走索引的情况
+1、in, 2个及以上参数 ，单列索引a， where a in (xxxx) ，如果参数是1个会用到索引，如果参数是2个及以上不会用到索引（包括int和varchar类型的字段）
+2、like '%abc' 或者 like‘%abc%’
+3 where num/2=100 或者 substring(a,1,3)='ab'或者age+10=30（where 后面带运算）
+4 where id !=2 或者 where id <> 2（不等于，优化: <2 union all >2）
+5 where name is null(设计表的时候，尽量设计默认值 优化：where name = '****',高版本的是走了索引 ）
+6 not in ,单列索引a ，where a not in (xxxxx) ，不管里面是一个还是多个参数都用不到a的索引（包括int和varchar类型的字段）
+8 单列索引a , where条件中 ：
+a用到（比如a> xxx 或者 a>=yyy 或者 a >xxx and a <yyy 或者 a  between xxx and yyy  均会用到），
+a > xxx or a <yyy 用不到。（包括int和varchar类型的字段）
+9 单列索引a,单列索引b,单列索引c,where条件中 ：
+
+a or b 均用不到，
+
+a or b or c 均用不到，
+
+a and b 用到 a的索引，
+
+a and b and c 用到a的索引，
+
+c and b 用到b的索引(谁的索引定义在前面用谁的),
+
+(a and b ) or c 均用不到，
+
+(a or b ) and c 用到c的索引
+
+ 
+
+10 复合索引a-b-c，where条件中 ：
+
+a用到，
+
+a and b用到，
+
+b and a用到，
+
+a and c用到，
+
+c and a用到，
+
+a and b and c用到，
+
+c and b and a用到，
+
+b用不到，
+
+c用不到，
+
+b and c用不到，
+
+c and b用不到，
+
+a or b用不到，
+
+b or c用不到,
+
+a or b or c用不到，
+
+(a or b) and c用不到，
+
+(a and b) or c用不到，
+
+(a or d) and b and c 用不到
+
+有or的情况下 索引失效
+like查询是以%开头索引失效
+like查询是以%结尾索引生效
+like查询是以%开头结尾索引失效
+如果列类型是字符串，那一定要在条件中将数据使用引号引用起来,否则不使用索引（隐式转换）
+其他情况不会走索引：
+1) 没有查询条件，或者查询条件没有建立索引（select * from account 或者 select * from account where login_name = 'james'）
+3) 查询的数量是大表的大部分，应该是30％以上。 
+5) 查询条件使用函数在索引列上，或者对索引列进行运算，运算包括(+，-，*，/，! 等) 
+错误的例子：select * from test where id-1=9; 
+正确的例子：select * from test where id=10; 
+9) CBO计算走索引花费过大的情况。其实也包含了上面的情况，这里指的是表占有的block要比索引小。 
+10)隐式转换导致索引失效.这一点应当引起重视.也是开发中经常会犯的错误. 由于表的字段tu_mdn定义为varchar2(20),
+但在查询时把该字段作为number类型以where条件传给Oracle,这样会导致索引失效. 
+错误的例子：select * from test where tu_mdn=13333333333; 
+正确的例子：select * from test where tu_mdn='13333333333'; 
+12) 1,<> 2,单独的>,<,(有时会用到，有时不会) between
+13,like "%_" 百分号在前. 
+15,单独引用复合索引里非第一位置的索引列. 
+16,字符型字段为数字时在where条件里不添加引号. 
+17,对索引列进行运算.需要建立函数索引. 
+18,not in ,not exist. 
+19,当变量采用的是times变量，而表的字段采用的是date变量时.或相反情况。 
+20,B-tree索引 is null不会走,is not null会走,位图索引 is null,is not null 都会走 
+21,联合索引 is not null 只要在建立的索引列（不分先后）都会走, in null时 必须要和建立索引第一列一起使用,
+当建立索引第一位置条件是is null 时,其他建立索引的列可以是is null（但必须在所有列 都满足is null的时候）,或者=一个值；
+当建立索引的第一位置是=一个值时,其他索引列可以是任何情况（包括is null =一个值）,以上两种情况索引都会走。其他情况不会走。
+
+
+in、exists 和 not in、 not exists区别以及跟索引的关系
+mysql中的in语句是把外表和内表作hash 连接，而exists语句是对外表作loop循环.
+如果查询的两个表大小相当，那么用in和exists差别不大。 
+如果两个表中一个较小，一个是大表，则子查询表大的用exists，子查询表小的用in： 
+例如：表A（小表），表B（大表）
+1：
+select * from A where cc in (select cc from B) 效率低，用到了A表上cc列的索引；
+select * from A where exists(select cc from B where cc=A.cc) 效率高，用到了B表上cc列的索引。 
+相反的
+2：
+select * from B where cc in (select cc from A) 效率高，用到了B表上cc列的索引；
+select * from B where exists(select cc from A where cc=B.cc) 效率低，用到了A表上cc列的索引。
+not in 和not exists如果查询语句使用了not in 那么内外表都进行全表扫描，没有用到索引；而not extsts 的子查询依然能用到表上的索引。
+所以无论那个表大，用not exists都比not in要快。 
+in 与 =的区别 
+select name from student where name in ('zhang','wang','li','zhao'); 
+与 
+select name from student where name='zhang' or name='li' or name='wang' or name='zhao' 
+的结果是相同的。但是or有可能没有命中索引
+
+union 和 union all的区别（获取的数据内容以及他们的性能方面）
+union all 有可能有重复的数据，而union一定没有
+
+读写分离配置：
+https://blog.csdn.net/qq_35622837/article/details/81130776
+
+
+
+
+
+
+
+
 
 
 

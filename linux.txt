@@ -1,31 +1,84 @@
+常用的shell命令：
 showdown -h now
 systemctl stop firewalld.service 关闭防火墙
 nohup command > myout.file 2>&1 &
+常用的项目启动命令
+nohup java -jar -Dspring.config.location=/etc/xhg/xhg-sys-config/application.properties /data/xhg-sys-config-1.0.4.jar 2>/data/logs/xhg-sys-config/xhgsysconfigerr.out 1>/data/logs/xhg-sys-config/xhgsysconfigstd.out &
 
-http://DESKTOP-V15JKM4/svn/Test/Zeng/
+nohup java -jar -Dspring.config.location=/etc/xhg/xhg-boss/application.properties /data/xhg-boss-1.1.6.jar 
+2>/data/logs/boss/bosserr.out 1>/data/logs/boss/bossstd.out &
+
+nohup java -jar  -Xms200m -Xmx200m -XX:+HeapDumpOnOutOfMemoryError 
+-XX:HeapDumpPath=/data/logs/xhg-cms-service/ 
+-Dspring.config.location=/etc/xhg/xhg-cms-service/application.properties 
+xhg-cms-service-1.0.9.jar 
+2>../logs/xhg-cms-service/cmsserviceerr.out  
+1>../logs/xhg-cms-service/cmsservicestd.out  &
+
+
+java -jar -Xms200m -Xmx200m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/logs/boss/ -Dspring.config.location=/etc/xhg/xhg-boss/application.properties /data/psrecycle/xhg-boss-1.4.0.jar
+
+yml配置文件：
+server:
+  port: 8082
+  
+spring:
+  profiles:
+    active: dev
+ 
+---
+# 开发环境配置
+spring:
+  profiles: dev
+mysql:
+  ipPort: localhost:3306
+  
+---
+# 测试环境配置
+spring:
+  profiles: test
+mysql:
+  ipPort: 192.168.0.12:8066
+  
+---
+# 生产环境配置
+spring:
+  profiles: prod
+mysql:
+  ipPort: 192.168.0.13:8066
+启动的时候指定环境：
+#   测试环境：nohup java -jar my-spring-boot.jar --spring.profiles.active=test
+#   生产环境：nohup java -jar my-spring-boot.jar --spring.profiles.active=prod
+或者java –jar -Dspring.profiles.active=prod
+也可以指定日志文件：
+nohup jdk1.8.0_181/bin/java -jar hangzhou-travel-data-1.0.jar --logging.config=./logback.xml &
+sh ./start.sh
+
 
 
 cat -n ectrip_log.2020-02-21.out |tail -n +400|head -n 200
- 表示从第400行开始往后查询200行数据
- cat -n linux.txt |tail -n +20|head -n 100 |grep err
- 
- 
-cat -n test.log |grep "查找的错误关键字"并且显示行号
-
+表示从第400行开始往后查询200行数据
+cat -n linux.txt |tail -n +20|head -n 100 |grep err
+表示从第400行开始往后查询200行数据并且需要匹配"err"字符串
+或者===》 cat -n ectrip_log.2020-02-21.out |grep 'checkTicket' |tail -n +400|head -n 200
+cat -n test.log |grep "
+表示查找的错误关键字"并且显示行号
 tail
-tail -n  10 test.log | grep   -- '关键字'   查询日志最后10行的日志;       显示行号(常用的)
-tail -n 6000  catalina.out |more -100 可以进行多屏显示(ctrl + f 或者 空格键可以快捷键)
-tail -n +10 test.log                        查询日志第10行之后的所有日志; 显示行号;
-
+tail -n  10 test.log | grep   -- '关键字'   
+查询日志最后10行的日志;       显示行号(常用的)
+tail -n 6000  catalina.out |more -100 
+可以进行多屏显示(ctrl + f 或者 空格键可以快捷键)
+tail -n +10 test.log                        
+查询日志第10行之后的所有日志; 显示行号;
 head
-head -n  10  test.log   查询日志文件中的头部10行日志;
-head -n -10  test.log   查询日志文件（除了最后10行）的其他所有日志;
+head -n  10  test.log   
+查询日志文件中的头部10行日志;
+head -n -10  test.log   
+查询日志文件（除了最后10行）的其他所有日志;
 
 less cms-service_error.2018-12-19.7.log|grep 'error'
 less sys-config.log |grep -100 1c4d1792f401a8330000
 
-cat -n ectrip_log.2020-02-21.out |grep 'checkTicket' |tail -n +400|head -n 200
-tail -n 500 ectrip_log.2020-02-21.out|grep 'eyJhY2NpZCI6IjMiLCJnYXJkZW5p'
 8.根据日期时间段查询(前提日志总必须打印日期,先通过grep确定是否有该时间点)
 sed -n '/2018-06-01 16:00:20/,/2018-06-01 16:06:36/p' app.log
 9.使用more和less命令(分页查看,使用空格翻页)
@@ -35,27 +88,15 @@ cat -n app.log |grep "error" > temp.txt
 11.将指定时间的日志导入到文件中
 cat -n logs/catalina.out '/2018-06-08 00:00:20/,/2018-06-06 16:06:36/p' > pay.out
 
-
-
-
-test  err 1234
-exception null
-cat -n linux.txt |tail -n +20|head -n 100 |grep err
-less linux.txt|grep 'error'
-
-
-
 sed -n '/2020-05-01 16:29:08/,/2020-05-01 16:29:39/p' ectrip_log.2020-05-01.out
 
 tail -fn 1000  ectrip_log.2020-05-01.out
-
-
 tail -n 6000  ectrip_log.2020-05-01.out |more -100 
 
 
 linux下history命令显示历史指令记录的使用方法
- history 10
- history |grep tail
+history 10
+history |grep head 
  逐屏列出所有的历史记录：
  history | more
 立即清空history当前所有历史命令的记录
@@ -63,3 +104,132 @@ history -c
 以下看所有的重启、关机记录
 last | grep reboot
 last | grep shutdown
+
+
+1、查找命令：
+whereis locate which find who whois whoami history
+2、文件状态
+蓝色表示目录;
+绿色表示可执行文件;
+红色表示压缩文件;
+
+浅蓝色表示链接文件;
+灰色表示其它文件;
+红色闪烁表示链接的文件有问题了;
+黄色是设备文件，包括block, char, fifo。
+用dircolors -p看到缺省的颜色设置，包括各种颜色和“粗体”，下划线，闪烁等定义。
+如果需要改变系统默认的这个颜色，可以用下面的方法：
+# vi /etc/DIR_COLORS
+然后在文件里面，找到自己想要修改的项，如要改目录颜色的话，可以把DIR 01；34改成“DIR 01；37；44”，37是字体白色，44是字背景蓝色。
+编辑完成后保存退出
+然后，执行
+# eval `dircolors /etc/DIR_COLORS`
+注意命令中的`符号为键盘~符号下面的那个，别弄错了。
+
+文件的权限：
+白色是普通文件没有执行权限
+通过chmod +x filename,
+chmod +r filename,
+chmod +w filename,
+filename就变成绿色了
+chmod 755 file 绿色
+chmod 644 file 白色 
+
+r　　4
+w　　2　　
+x　　1
+-　　0
+
+chmod	用户类型	操作字符	权限字符	文件名
+u（user）	+(增加）	r
+g（group）	 	-
+o（others）	-（减少）	w
+a（all）	=（设置）	x
+
+比如：chmod u+x filename
+      chmod a+x filename
+	  chmod o-w filename
+	  chmod g=w filename
+	  
+
+rw-rw-r-x　　代表数字权限：665
+--xr-x-wx　　代表数字权限：163
+-wx--x--x　　代表数字权限：311
+rwx--xr-x　　代表数字权限：715
+-----x-w-　　代表数字权限：012
+d（文件类型）rwxr-xr-x 4（？） root（属主）   root（属组）  4096（？） May 14 15:52（最近修改日期） pingyao
+-rw-r--r-- 1 tomcat tomcat                0（字符大小） Dec 25 16:44 runqianReport.log
+
+文件类型：（-：普通文件，d:目录文件，l:链接文件，b:设备文件，c:字符设备文件，p:管道文件）
+
+./aa.sh(表示执行当前目录的aa.sh文件）
+
+文件复制（移动）
+
+创建用户 用户组 用户权限
+useradd test1
+passwd test1 123456
+
+groupadd dev　　添加用户组
+groupdel dev　　删除用户组
+
+useradd -m -g dev test1
+id test1
+
+给普通用户赋予root权限
+修改文件/etc/passwd，将用户名为test1的用户ID修改为0即可
+vi /etc/passwd
+用户信息为test1:x:1002:1002::/home/test1:/bin/bash，将其修改为test1:x:0:1002::/home/test1:/bin/bash
+每一行代表一个用户信息
+查看所有的用户信息
+cat /etc/passwd
+分别代表 用户名:密码:用户ID:用户组ID:备注:用户家目录:shell命令目录
+查看所有用户组
+cat /etc/group
+
+权限赋值chgrp、chown、chmod命令:
+chown: 更改文件或目录的所有者　　　　chang owner
+chgrp :  更改文件或目录的所属组　　　change group
+chmod: 更改文件或目录的权限　　　　  change modify
+
+chgrp 用户组 文件名 其中：-R代表递归
+chgrp -R user smb.conf
+格式A：chown -R -h 用户名 文件/目次
+-h选项意味着在改变符号链接文件的属主时不影响该链接所指向的目标文件.
+注意：一旦将文件的所有权交给了另一个用户，就无法再重新收回它的所有权，
+最终只能求助于系统管理员.
+chown 用户名：用户组：文件/目次 其中：-R代表递归
+chown -R keesail:keesails ./local 
+指定local目录所有者为keesail
+chmod 760 ./local 
+赋予local目录读写权限给keesail，别的用户对这个目录没有任何权限。
+
+用户组 chgrp -R foldname zdz
+例如：chgrp -R zdz KooBox
+chown -R  所有者用户名.组名 文件夹名称
+例如：chown -R  zdz.nginx KooBox
+chmod ugo+r file1.txt
+chmod a+r file1.txt
+chmod ug+w,o-w file1.txt file2.txt
+将今朝目次下的全部档案与子目次皆设为任何人可读取 :
+chmod -R a+r *
+
+切换root su root（Switch users)
+切换普通用户 su user
+
+在/etc下查找“*.log”的文件
+find /etc -name “*.log”
+
+shell编程学习：
+可以启动项目
+可以运行python文件 
+可以控制台打印文案
+linux命令的集合（对文件的创建 删除 修改 维护）
+
+
+
+
+
+
+
+

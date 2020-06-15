@@ -475,7 +475,42 @@ springboot整合oauth
 
 用户无感知的操作
 
+写个工具类
+根据开始时间和结束时间返回时间段内的时间集合
+list 根据一个到多个属性排序
+list groupby
+list 求和
+list groupby sum
+list 去重
+对象的equals hashcode
+HashSet HashCode表机构存储
+TreeSet 数机构存储
+HashMap排序
+TreeMap
+List map排序:
+Collections.sort(list, new Comparator<TestAccount>() {
+		@Override
+		public int compare(TestAccount ta1, TestAccount ta2) {
+			return ta2.date.compareTo(ta1.date);
+	}});
 
+List<Object>去重:
+set distinct
+groupby:
+Map<Boolean, List<Integer>> collectGroup = Stream.of(1, 2, 3, 4).collect(Collectors.groupingBy(it -> it > 3));  
+
+public static <T> List<T> set2List2(List<T> list,T t) {
+
+	list.add(t);
+	return list;
+}
+
+public static <T> T set2List(T set) {
+
+	List<T> list = new ArrayList<>();
+	list.add(set);
+	return set;
+}
 
 
 

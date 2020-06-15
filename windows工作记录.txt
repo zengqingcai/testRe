@@ -1,0 +1,4 @@
+
+SVN服务器：
+http://DESKTOP-V15JKM4/svn/Test/Zeng/
+rabbitMq服务器：
